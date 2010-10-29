@@ -9,7 +9,6 @@ MY_PV=$(get_major_version)
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://openra.res0l.net/"
 SRC_URI="http://github.com/OpenRA/OpenRA/tarball/release-${MY_PV}"
-#SRC_URI="http://download.github.com/OpenRA-OpenRA-playtest-20101025-0-gb80962b.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"

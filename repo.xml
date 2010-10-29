@@ -1,0 +1,9 @@
+ <repo quality="experimental" status="unofficial">
+   <name><![CDATA[dr]]></name>
+   <description><![CDATA[ebuilds of misc packages which are not present in the portage tree]]></description>
+   <homepage>http://github.com/cerebrum/dr</homepage>
+   <owner>
+     <email>luminarior@gmail.com</email>
+   </owner>
+   <source type="git">git://github.com/cerebrum/dr.git</source>
+</repo>
