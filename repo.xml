@@ -1,9 +1,14 @@
- <repo quality="experimental" status="unofficial">
-   <name><![CDATA[dr]]></name>
-   <description><![CDATA[ebuilds of misc packages which are not present in the portage tree]]></description>
-   <homepage>http://github.com/cerebrum/dr</homepage>
-   <owner>
-     <email>luminarior@gmail.com</email>
-   </owner>
-   <source type="git">git://github.com/cerebrum/dr.git</source>
-</repo>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>dr</name>
+    <description>experimental ebuilds of misc packages which are not present in the portage tree</description>
+    <homepage>http://github.com/cerebrum/dr</homepage>
+    <owner type="project">
+      <email>luminarior@gmail.com</email>
+      <name>Jaroslav</name>
+    </owner>
+    <source type="git">git://github.com/cerebrum/dr.git</source>
+  </repo>
+</repositories>
