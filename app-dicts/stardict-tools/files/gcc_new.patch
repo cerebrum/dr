@@ -1,0 +1,82 @@
+diff -ur stardict-tools-3.0.1.orig/src/bgl_babylon.h stardict-tools-3.0.1/src/bgl_babylon.h
+--- stardict-tools-3.0.1.orig/src/bgl_babylon.h	2007-08-16 11:52:38.000000000 +0400
++++ stardict-tools-3.0.1/src/bgl_babylon.h	2009-10-09 16:58:15.476323120 +0400
+@@ -24,6 +24,8 @@
+ #include <stdlib.h>
+ #include <zlib.h>
+ 
++#include <cstring>
++
+ #include <string>
+ #include <vector>
+ 
+diff -ur stardict-tools-3.0.1.orig/src/bgl_stardictbuilder.h stardict-tools-3.0.1/src/bgl_stardictbuilder.h
+--- stardict-tools-3.0.1.orig/src/bgl_stardictbuilder.h	2007-08-01 08:00:59.000000000 +0400
++++ stardict-tools-3.0.1/src/bgl_stardictbuilder.h	2009-10-09 16:59:00.480324090 +0400
+@@ -22,6 +22,8 @@
+ 
+ #include "bgl_dictbuilder.h"
+ 
++#include <cstring>
++
+ #include <map>
+ #include <fstream>
+ 
+Only in stardict-tools-3.0.1/src/: .deps
+diff -ur stardict-tools-3.0.1.orig/src/dictbuilder.cpp stardict-tools-3.0.1/src/dictbuilder.cpp
+--- stardict-tools-3.0.1.orig/src/dictbuilder.cpp	2007-07-10 11:16:06.000000000 +0400
++++ stardict-tools-3.0.1/src/dictbuilder.cpp	2009-10-09 17:01:51.524324446 +0400
+@@ -6,6 +6,8 @@
+ #include <string>
+ #include <vector>
+ 
++#include <cstring>
++
+ #include <libgen.h>
+ #include <glib.h>
+ 
+diff -ur stardict-tools-3.0.1.orig/src/libbgl2txt.h stardict-tools-3.0.1/src/libbgl2txt.h
+--- stardict-tools-3.0.1.orig/src/libbgl2txt.h	2007-08-01 07:00:35.000000000 +0400
++++ stardict-tools-3.0.1/src/libbgl2txt.h	2009-10-09 16:57:07.480323049 +0400
+@@ -2,6 +2,7 @@
+ #define _LIBBGL2TXT_H_
+ 
+ #include <string>
++#include <cstring>
+ 
+ extern void convert_bglfile(std::string infile, std::string source_charset, std::string target_charset);
+ 
+Only in stardict-tools-3.0.1/src/: Makefile
+diff -ur stardict-tools-3.0.1.orig/src/tabfile2sql.cpp stardict-tools-3.0.1/src/tabfile2sql.cpp
+--- stardict-tools-3.0.1.orig/src/tabfile2sql.cpp	2007-08-15 09:56:06.000000000 +0400
++++ stardict-tools-3.0.1/src/tabfile2sql.cpp	2009-10-09 17:02:34.151321792 +0400
+@@ -8,6 +8,7 @@
+ #include <mysql.h>
+ 
+ #include <string>
++#include <cstring>
+ 
+ void print_info(const char *info)
+ {
+diff -ur stardict-tools-3.0.1.orig/src/wordnet.cpp stardict-tools-3.0.1/work/stardict-tools-3.0.1/src/wordnet.cpp
+--- stardict-tools-3.0.1.orig/src/wordnet.cpp	2007-09-10 11:49:15.000000000 +0400
++++ stardict-tools-3.0.1/work/stardict-tools-3.0.1/src/wordnet.cpp	2009-10-09 17:39:01.011322372 +0400
+@@ -2,6 +2,7 @@
+ #include <stdlib.h>
+ #include <glib.h>
+ #include <string> 
++#include <cstring> 
+ 
+ 
+ static int hexalpha_to_int(int c)
+diff -ur stardict-tools-3.0.1.orig/src/wubi.cpp stardict-tools-3.0.1/src/wubi.cpp
+--- stardict-tools-3.0.1.orig/src/wubi.cpp	2007-07-10 11:16:06.000000000 +0400
++++ stardict-tools-3.0.1/src/wubi.cpp	2009-10-09 17:03:19.420323247 +0400
+@@ -5,6 +5,7 @@
+ #include <unistd.h>
+ #include <glib.h>
+ #include <string>
++#include <cstring>
+ 
+ void convert(const char *filename)
+ {
