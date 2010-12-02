@@ -69,10 +69,10 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog
-	elog " You will need to install the Tao deps (.dll and .config) from the"
-	elog " thirdparty/Tao dir permanently into your GAC with the following script:"
-	elog " inst_tao_deps.sh (run in OpenRA dir)"
+	#elog
+	#elog " You will need to install the Tao deps (.dll and .config) from the"
+	#elog " thirdparty/Tao dir permanently into your GAC with the following script:"
+	#elog " inst_tao_deps.sh (run in OpenRA dir)"
 	elog
 	elog " You may run the game from desktop games menu or just manually"
 	elog " run the game with \`mono OpenRA.Game.exe Game.Mods=ra\` for Red Alert"
@@ -152,4 +152,5 @@ pkg_postinst() {
 	elog " http://master.open-ra.org/list.php"
 	elog
 	update-desktop-database
+	/bin/bash inst_tao_deps.sh
 }
