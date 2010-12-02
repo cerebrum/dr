@@ -129,16 +129,17 @@ pkg_postinst() {
 		elog "	* desert.mix"
 		elog
 	fi
-#	elog " If you have a case-sensitive filesystem you must change the filenames to"
-#	elog " lower case."
-#	elog
-#	elog " Red Alert and C&C have been released by EA Games as freeware. They can be"
-#	elog " downloaded from http://www.commandandconquer.com/classic"
-#	elog " Unfortunately the installer is 16-bit and so won’t run on 64-bit operating"
-#	elog " systems. This can be worked around by using the Red Alert Setup Manager "
-#	elog "	(http://ra.afraid.org/html/downloads/utilities-3.html). "
-#	elog " Make sure you apply the no-CD protection fix so all the files needed "
-#	elog " are installed to the hard drive."
+	elog
+	elog " Red Alert and C&C have been released by EA Games as freeware. They can be"
+	elog " downloaded from http://www.commandandconquer.com/classic"
+	elog " Unfortunately the installer is 16-bit and so won’t run on 64-bit operating"
+	elog " systems. This can be worked around by using the Red Alert Setup Manager "
+	elog "	(http://ra.afraid.org/html/downloads/utilities-3.html). "
+	elog " Make sure you apply the no-CD protection fix so all the files needed "
+	elog " are installed to the hard drive."
+	elog
+	elog " If you have a case-sensitive filesystem you must change the filenames to"
+	elog " lower case."
 	elog
 	elog " OpenRA is incompatible with Compiz, please disable desktop effects"
 	elog " when trying to run OpenRA or the game will crash."
