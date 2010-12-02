@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Version={VERSION}
-Name=OpenRA - Command & Conquer
-Comment=The OpenRA RTS (Cg) engine running Command & Conquer
+Name=OpenRA - Command & Conquer (Gl)
+Comment=The OpenRA RTS (Gl) engine running Command & Conquer
 Icon=/usr/share/pixmaps/openra.32.xpm
 Exec=/usr/local/bin/openra Game.Mods=cnc
 Terminal=false

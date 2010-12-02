@@ -151,4 +151,5 @@ pkg_postinst() {
 	elog " You may also see servers list with"
 	elog " http://master.open-ra.org/list.php"
 	elog
+	update-desktop-database
 }

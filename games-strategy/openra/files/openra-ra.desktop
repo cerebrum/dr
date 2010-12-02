@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Version={VERSION}
-Name=OpenRA - Red Alert
-Comment=The OpenRA RTS engine running Red Alert
+Name=OpenRA - Red Alert (Gl)
+Comment=The OpenRA RTS (Gl) engine running Red Alert
 Icon=/usr/share/pixmaps/openra.32.xpm
 Exec=/usr/local/bin/openra Game.Mods=ra
 Terminal=false
