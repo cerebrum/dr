@@ -5,5 +5,7 @@
 
   <use>
   <flag name='cg'>Enable support of old renderer through NVidia Cg</flag>
+  <flag name='ra'>Download &amp; Install RA mod packages from internet</flag>
+  <flag name='cnc'>Download &amp; Install C&amp;C mod packages from internet</flag>
   </use>
 </pkgmetadata>
