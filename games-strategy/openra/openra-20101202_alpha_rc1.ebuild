@@ -80,7 +80,9 @@ pkg_postinst() {
 	if use cg ; then
 		elog
 		elog " You may also run the game with alternative Cg Graphics Renderer"
-		elog " by adding \`Graphics.Renderer=Cg\` parameter to above commands."
+		elog " by adding \`Graphics.Renderer=Cg\` parameter to above commands"
+		elog " (convenient for some integrated graphics cards) or run clearly"
+		elog " with a default one by adding \`Graphics.Renderer=Gl\` parameter."
 	fi
 	cd "${INSTALL_DIR}"
 	# Download and install RA packages
@@ -89,9 +91,10 @@ pkg_postinst() {
 			mono OpenRA.Utility.exe --extract-zip=/tmp/ra-packages.zip,ra/packages/
 	else
 		elog
-		elog " The RA packages will need to be manually extracted from"
-		elog " http://open-ra.org/get-dependency.php?file=ra-packages to mods/ra/packages/"
-		elog " before the RA mod will work."
+		elog " The RA packages will need to be manually extracted to mods/ra/packages/"
+		elog " before the RA mod will work. You may try to download pack from our site"
+		elog " http://open-ra.org/get-dependency.php?file=ra-packages"
+		elog " But the better choise is to download full pack from original game iso."
 		elog
 		elog " The required files for the Red Alert mod are:"
 		elog " EITHER:"
@@ -114,9 +117,10 @@ pkg_postinst() {
 			mono OpenRA.Utility.exe --extract-zip=/tmp/cnc-packages.zip,cnc/packages/
 	else
 		elog
-		elog " The C&C packages will need to be manually extracted from"
-		elog " http://open-ra.org/get-dependency.php?file=cnc-packages to mods/cnc/packages/"
-		elog " before the C&C mod will work."
+		elog " The C&C packages will need to be manually extracted to mods/cnc/packages/"
+		elog " before the C&C mod will work. You may try to download pack from our site"
+		elog " http://open-ra.org/get-dependency.php?file=cnc-packages"
+		elog " But the better choise is to download full pack from original game iso."
 		elog
 		elog " The required files for the Command and Conquer mod are:"
 		elog "	* cclocal.mix"
