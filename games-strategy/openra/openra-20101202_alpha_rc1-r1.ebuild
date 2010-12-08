@@ -81,7 +81,7 @@ pkg_postinst() {
 		elog
 		elog " You may also run the game with alternative Cg Graphics Renderer"
 		elog " by adding \`Graphics.Renderer=Cg\` parameter to above commands"
-		elog " (convenient for some integrated graphics cards) or run clearly"
+		elog " (convenient for some integrated graphics cards) or run explicitly"
 		elog " with a default one by adding \`Graphics.Renderer=Gl\` parameter."
 	fi
 	cd "${INSTALL_DIR}"
