@@ -4,6 +4,6 @@ Version={VERSION}
 Name=OpenRA - Red Alert (Gl)
 Comment=The OpenRA RTS (Gl) engine running Red Alert
 Icon=/usr/share/pixmaps/openra.32.xpm
-Exec=/usr/local/bin/openra Game.Mods=ra
+Exec=/usr/local/bin/openra Game.Mods=ra Graphics.Renderer=Gl
 Terminal=false
 Categories=Game;
