@@ -9,3 +9,4 @@ gacutil -i thirdparty/Tao/Tao.OpenGl.dll
 gacutil -i thirdparty/Tao/Tao.OpenAl.dll
 gacutil -i thirdparty/Tao/Tao.Sdl.dll
 gacutil -i thirdparty/Tao/Tao.FreeType.dll
+gacutil -i ICSharpCode.SharpZipLib.dll
