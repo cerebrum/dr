@@ -4,6 +4,6 @@ Version={VERSION}
 Name=OpenRA - Command & Conquer (Gl)
 Comment=The OpenRA RTS (Gl) engine running Command & Conquer
 Icon=/usr/share/pixmaps/openra.32.xpm
-Exec=/usr/local/bin/openra Game.Mods=cnc Graphics.Renderer=Gl
+Exec=/usr/bin/openra-bin Game.Mods=cnc Graphics.Renderer=Gl
 Terminal=false
 Categories=Game;

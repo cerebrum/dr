@@ -1,0 +1,32 @@
+--- Makefile-20110105	2011-01-04 23:13:53.000000000 +0300
++++ Makefile	2011-01-06 14:40:09.056077886 +0300
+@@ -5,7 +5,9 @@
+ PHONY		= core tools package all mods clean distclean
+ 
+ CC	= gcc
+-CFLAGS	= -O2 -Wall -m32
++#CFLAGS	= -O2 -Wall -m32
++CFLAGS	= -O2 -Wall
++LDFLAGS="-Wl,-O1"
+ 
+ .SUFFIXES:
+ core: game renderers mod_ra mod_cnc
+@@ -181,7 +183,7 @@
+ 
+ gtklaunch: $(gtklaunch_HEADERS) $(gtklaunch_SRCS)
+ 	@echo CC launcher
+-	@$(CC) $(CFLAGS) $(shell pkg-config --cflags --libs gtk+-2.0 webkit-1.0) -I/usr/include/ -lgcrypt -o gtklaunch $(gtklaunch_SRCS) /usr/lib/libmicrohttpd.a
++	@$(CC) $(CFLAGS) $(LDFLAGS) $(shell pkg-config --cflags --libs gtk+-2.0 webkit-1.0) -I/usr/include/ -lgcrypt -o gtklaunch $(gtklaunch_SRCS) /usr/lib/libmicrohttpd.a
+ 
+ .PHONY: $(PHONY) $(PROGRAMS)
+ 
+@@ -207,7 +209,8 @@
+ #
+ # Install / Uninstall for *nix
+ #
+-prefix = /usr/local
++#prefix = /usr/local
++prefix = /usr
+ datarootdir = $(prefix)/share
+ datadir = $(datarootdir)
+ bindir = $(prefix)/bin
