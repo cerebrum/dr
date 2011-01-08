@@ -1,0 +1,26 @@
+--- Makefile-20110107	2011-01-07 05:34:28.000000000 +0300
++++ Makefile	2011-01-08 10:43:19.724376609 +0300
+@@ -182,11 +182,11 @@
+ 
+ gtklaunch: $(gtklaunch_HEADERS) $(gtklaunch_SRCS)
+ 	@echo CC launcher
+-	@$(CC) $(CFLAGS) $(shell pkg-config --cflags --libs gtk+-2.0 webkit-1.0) -I/usr/include/ -lgcrypt -o gtklaunch $(gtklaunch_SRCS) /usr/lib/libmicrohttpd.a
++	@$(CC) -o gtklaunch $(gtklaunch_SRCS) $(CFLAGS) $(shell pkg-config --cflags gtk+-2.0 webkit-1.0) -I/usr/include/ $(LDFLAGS) $(shell pkg-config --libs gtk+-2.0 webkit-1.0) -lgcrypt -lmicrohttpd
+ 
+ gtklaunch32: $(gtklaunch_HEADERS) $(gtklaunch_SRCS)
+ 	@echo CC launcher32
+-	@$(CC) $(CFLAGS32) $(shell pkg-config --cflags --libs gtk+-2.0 webkit-1.0) -I/usr/include/ -lgcrypt -o gtklaunch32 $(gtklaunch_SRCS) /usr/lib/libmicrohttpd.a
++	@$(CC) -o gtklaunch32 $(gtklaunch_SRCS) $(CFLAGS32) $(shell pkg-config --cflags gtk+-2.0 webkit-1.0) -I/usr/include/ $(LDFLAGS) $(shell pkg-config --libs gtk+-2.0 webkit-1.0) -lgcrypt -lmicrohttpd
+ 
+ .PHONY: $(PHONY) $(PROGRAMS)
+ 
+@@ -212,7 +212,8 @@
+ #
+ # Install / Uninstall for *nix
+ #
+-prefix = /usr/local
++#prefix = /usr/local
++prefix = /usr
+ datarootdir = $(prefix)/share
+ datadir = $(datarootdir)
+ bindir = $(prefix)/bin

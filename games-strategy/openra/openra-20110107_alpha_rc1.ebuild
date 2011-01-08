@@ -2,32 +2,35 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit versionator eutils
+inherit versionator eutils flag-o-matic
 
 MY_PV=$(get_major_version)
-VERSION=${MY_PV}
+VERSION="${MY_PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://openra.res0l.net/"
-SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/release-${VERSION}"
+#SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/release-${VERSION}"
 #SRC_URI="https://www.github.com/OpenRA/OpenRA/zipball/playtest-${VERSION}"
+SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/playtest-${VERSION}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="cg ra cnc video_cards_nvidia"
-DEPEND="video_cards_nvidia? (
-	cg? (
+#video_cards_nvidia
+IUSE="cg ra cnc"
+DEPEND="cg? (
 	>=media-gfx/nvidia-cg-toolkit-2
-	)
 	)
 	dev-lang/mono
 	media-libs/mesa
 	media-libs/freetype
+	net-libs/libmicrohttpd
+	net-libs/webkit-gtk
 	>=media-libs/openal-1.1
 	>=media-libs/libsdl-1.2"
 RDEPEND="${DEPEND}"
-INSTALL_PREFIX="/usr/local/share"
-INSTALL_DIR=${INSTALL_PREFIX}/${PN}
+INSTALL_PREFIX="/usr"
+INSTALL_DIR="${INSTALL_PREFIX}/share/${PN}"
+INSTALL_DIR_BIN="${INSTALL_PREFIX}/bin"
 ICON_DIR="/usr/share/icons"
 
 src_unpack() {
@@ -40,32 +43,40 @@ src_unpack() {
 
 src_compile() {
 	cd ${OPENRADIR}
+	epatch "${FILESDIR}/openra-20110107-patch.diff"
+	#econf || die "econf failed in ${S}"
+	#emake CFLAGS="${CFLAGS}" || die "emake failed in ${S}"
 	emake || die "emake failed in ${S}"
 }
 
 src_install() {
 	cd ${OPENRADIR}
-	emake DESTDIR="${D}" install || die "Install failed"
+	# Update mod versions
+	sed "s/{DEV_VERSION}/$VERSION/" -i mods/ra/mod.yaml
+	sed "s/{DEV_VERSION}/$VERSION/" -i mods/cnc/mod.yaml
+	filter-ldflags -s
+	emake DESTDIR="${D}" LDFLAGS="${LDFLAGS}" install || die "Install failed"
+	exeinto "${INSTALL_DIR_BIN}"
+	doexe ${FILESDIR}/openra-bin || die "Install of openra-bin failed"
 	exeinto "${INSTALL_DIR}"
-	doexe ${FILESDIR}/inst_tao_deps.sh || die "inst_tao_deps.sh"
+	doexe ${FILESDIR}/inst_tao_deps.sh || die "Install of inst_tao_deps.sh failed"
 	# Remove unneeded files
 	rm OpenRA.Launcher.exe
 	# Desktop Icons
-	dodir ${DESK_DIR}/
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
-	domenu openra-ra.desktop openra-cnc.desktop
+	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-gtklauncher.desktop > openra-gtklauncher.desktop
+	domenu openra-ra.desktop openra-cnc.desktop openra-gtklauncher.desktop
 	if use cg ; then
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
 		domenu openra-ra-cg.desktop openra-cnc-cg.desktop
 	fi
 	# Icon images
-	dodir ${PIXM_DIR}/
-	doicon ${FILESDIR}/openra.32.xpm
-	dodir ${ICON_DIR}/
+	doicon packaging/linux/openra.32.xpm
 	insinto ${ICON_DIR}
-	doins -r ${FILESDIR}/hicolor
+	doins -r packaging/linux/hicolor
+	dodoc COPYING HACKING
 }
 
 pkg_postinst() {
