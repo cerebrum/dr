@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version={VERSION}
-Name=OpenRA - GTK Launcher
-Comment=The OpenRA RTS Launcher
-Icon=/usr/share/pixmaps/openra.32.xpm
-Exec=/usr/bin/openra
-Terminal=false
-Categories=Game;

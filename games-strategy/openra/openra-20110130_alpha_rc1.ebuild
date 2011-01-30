@@ -66,15 +66,15 @@ src_install() {
 	# Desktop Icons
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
-	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-gtklauncher.desktop > openra-gtklauncher.desktop
-	domenu openra-ra.desktop openra-cnc.desktop openra-gtklauncher.desktop
+	#sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-gtklauncher.desktop > openra-gtklauncher.desktop
+	domenu openra-ra.desktop openra-cnc.desktop #openra-gtklauncher.desktop
 	if use cg ; then
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
 		domenu openra-ra-cg.desktop openra-cnc-cg.desktop
 	fi
 	# Icon images
-	doicon packaging/linux/openra.32.xpm
+	#doicon packaging/linux/openra.32.xpm
 	insinto ${ICON_DIR}
 	doins -r packaging/linux/hicolor
 	dodoc COPYING HACKING

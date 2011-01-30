@@ -3,7 +3,7 @@ Type=Application
 Version={VERSION}
 Name=OpenRA - Red Alert (Cg)
 Comment=The OpenRA RTS (Cg) engine running Red Alert
-Icon=/usr/share/pixmaps/openra.32.xpm
+Icon=openra
 Exec=/usr/bin/openra-bin Game.Mods=ra Graphics.Renderer=Cg
 Terminal=false
 Categories=Game;
