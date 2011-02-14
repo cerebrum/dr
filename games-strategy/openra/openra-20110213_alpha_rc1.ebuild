@@ -52,8 +52,8 @@ src_compile() {
 src_install() {
 	cd ${OPENRADIR}
 	# Update mod versions
-	sed "s/{DEV_VERSION}/$VERSION/" -i mods/ra/mod.yaml
-	sed "s/{DEV_VERSION}/$VERSION/" -i mods/cnc/mod.yaml
+	sed "s/{DEV_VERSION}/playtest-$VERSION/" -i mods/ra/mod.yaml
+	sed "s/{DEV_VERSION}/playtest-$VERSION/" -i mods/cnc/mod.yaml
 	#filter-ldflags -s
 	#emake DESTDIR="${D}" LDFLAGS="${LDFLAGS}" install || die "Install failed"
 	emake DESTDIR="${D}" install || die "Install failed"
@@ -65,13 +65,13 @@ src_install() {
 	# Remove unneeded files
 	#rm OpenRA.Launcher.exe
 	# Desktop Icons
-	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
-	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
+	sed "s/{VERSION}/playtest-${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
+	sed "s/{VERSION}/playtest-${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
 	#sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-gtklauncher.desktop > openra-gtklauncher.desktop
 	domenu openra-ra.desktop openra-cnc.desktop #openra-gtklauncher.desktop
 	if use cg ; then
-		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
-		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
+		sed "s/{VERSION}/playtest-${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
+		sed "s/{VERSION}/playtest-${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
 		domenu openra-ra-cg.desktop openra-cnc-cg.desktop
 	fi
 	# Icon images
