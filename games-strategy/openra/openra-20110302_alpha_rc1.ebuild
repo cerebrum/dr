@@ -61,31 +61,24 @@ src_install() {
 	doexe packaging/linux/openra-bin || die "Install of openra-bin failed"
 	exeinto "${INSTALL_DIR}"
 	doexe packaging/linux/OpenRA.Utility.sh || die "Install of OpenRA.Utility.sh failed"
-	doexe ${FILESDIR}/inst_tao_deps.sh || die "Install of inst_tao_deps.sh failed"
-	# Remove unneeded files
-	#rm OpenRA.Launcher.exe
+	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
+	rm -rv ${D}${INSTALL_DIR}/thirdparty
 	# Desktop Icons
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
-	#sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-gtklauncher.desktop > openra-gtklauncher.desktop
-	domenu openra-ra.desktop openra-cnc.desktop #openra-gtklauncher.desktop
+	domenu openra-ra.desktop openra-cnc.desktop
 	if use cg ; then
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
 		domenu openra-ra-cg.desktop openra-cnc-cg.desktop
 	fi
 	# Icon images
-	#doicon packaging/linux/openra.32.xpm
 	insinto ${ICON_DIR}
 	doins -r packaging/linux/hicolor
 	dodoc COPYING HACKING CHANGELOG
 }
 
 pkg_postinst() {
-	#elog
-	#elog " You will need to install the Tao deps (.dll and .config) from the"
-	#elog " thirdparty/Tao dir permanently into your GAC with the following script:"
-	#elog " inst_tao_deps.sh (run in OpenRA dir)"
 	elog
 	elog " You may run the game from desktop games menu or just manually"
 	elog " run the game with \`mono OpenRA.Game.exe Game.Mods=ra\` for Red Alert"
@@ -170,5 +163,4 @@ pkg_postinst() {
 	elog " http://master.open-ra.org/list.php"
 	elog
 	update-desktop-database
-	/bin/bash inst_tao_deps.sh
 }
