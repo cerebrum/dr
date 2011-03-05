@@ -66,7 +66,8 @@ src_install() {
 	# Desktop Icons
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
-	domenu openra-ra.desktop openra-cnc.desktop
+	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-editor.desktop > openra-editor.desktop
+	domenu openra-ra.desktop openra-cnc.desktop openra-editor.desktop
 	if use cg ; then
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
