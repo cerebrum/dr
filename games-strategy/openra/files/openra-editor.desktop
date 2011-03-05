@@ -4,6 +4,6 @@ Version={VERSION}
 Name=OpenRA - Editor
 Comment=The OpenRA RTS Map Editor
 Icon=openra
-Exec=/usr/bin/mono /usr/share/openra/OpenRA.Editor.exe
+Exec=cd /usr/share/openra && mono /usr/share/openra/OpenRA.Editor.exe
 Terminal=false
 Categories=Game;
