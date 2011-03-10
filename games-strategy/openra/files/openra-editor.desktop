@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=OpenRA - Editor
-Comment=The OpenRA RTS Map Editor ver. {VERSION}
+Comment=Map Editor ver. {VERSION}
 Icon=openra
 Path=/usr/share/openra
 Exec="mono OpenRA.Editor.exe --settings-value ~/.openra"

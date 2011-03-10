@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=OpenRA - Red Alert (Gl)
-Comment=The OpenRA RTS ver. {VERSION} - Red Alert mod (Gl Renderer)
+Comment=ver. {VERSION} (Gl Renderer)
 Icon=openra
 Path=/usr/share/openra
 Exec="mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=ra Graphics.Renderer=Gl"

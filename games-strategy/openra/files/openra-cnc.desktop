@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=OpenRA - Command & Conquer (Gl)
-Comment=The OpenRA RTS ver. {VERSION} - Command & Conquer mod (Gl Renderer)
+Comment=ver. {VERSION} (Gl Renderer)
 Icon=openra
 Path=/usr/share/openra
 Exec="mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=cnc Graphics.Renderer=Gl"
