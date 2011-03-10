@@ -45,7 +45,7 @@ src_unpack() {
 src_compile() {
 	epatch "${FILESDIR}/fix-prefix.patch"
 	epatch "${FILESDIR}/ramusic.patch"
-	emake PREFIX="${PREFIX}" || die "emake failed in ${S}"
+	emake || die "emake failed in ${S}"
 }
 
 src_install() {
@@ -54,7 +54,7 @@ src_install() {
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/cnc/mod.yaml
 	#filter-ldflags -s
 	#emake DESTDIR="${D}" LDFLAGS="${LDFLAGS}" install || die "Install failed"
-	emake PREFIX="${PREFIX}" DESTDIR="${D}" install || die "Install failed"
+	emake DESTDIR="${D}" install || die "Install failed"
 	#exeinto "${INSTALL_DIR_BIN}"
 	#doexe packaging/linux/openra-bin || die "Install of openra-bin failed"
 	exeinto "${INSTALL_DIR}"

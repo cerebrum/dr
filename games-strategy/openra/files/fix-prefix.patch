@@ -5,7 +5,7 @@
  # Install / Uninstall for *nix
  #
 -prefix = /usr/local
-+prefix ?= /usr/local
++prefix = /usr
  datarootdir = $(prefix)/share
  datadir = $(datarootdir)
  bindir = $(prefix)/bin
