@@ -62,6 +62,8 @@ src_install() {
 	# Move Tao libraries to correct place and remove empty dirs
 	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
 	rm -rv ${D}${INSTALL_DIR}/thirdparty
+	# Remove old and unnecessary wrapper script
+	rm -v ${D}${INSTALL_DIR_BIN}/openra
 	# Desktop Icons
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
