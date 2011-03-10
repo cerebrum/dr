@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=OpenRA - Command & Conquer (Gl)
-Comment=ver. {VERSION} (Gl Renderer)
+GenericName=OpenRA - Command & Conquer (Gl)
+Name=OpenRA ver. {VERSION} (Gl Renderer)
 Icon=openra
 Path=/usr/share/openra
-Exec="mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=cnc Graphics.Renderer=Gl"
+Exec=mono OpenRA.Game.exe "SupportDir=~/.openra" UtilityPath=OpenRA.Utility.sh Game.Mods=cnc Graphics.Renderer=Gl
 Terminal=false

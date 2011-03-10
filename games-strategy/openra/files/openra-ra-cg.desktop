@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=OpenRA - Red Alert (Cg)
-Comment=ver. {VERSION} (Cg Renderer)
+GenericName=OpenRA - Red Alert (Cg)
+Name=OpenRA ver. {VERSION} (Cg Renderer)
 Icon=openra
 Path=/usr/share/openra
-Exec="mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=ra Graphics.Renderer=Cg"
+Exec=mono OpenRA.Game.exe "SupportDir=~/.openra" UtilityPath=OpenRA.Utility.sh Game.Mods=ra Graphics.Renderer=Cg
 Terminal=false

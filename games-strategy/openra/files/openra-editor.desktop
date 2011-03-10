@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=OpenRA - Editor
-Comment=Map Editor ver. {VERSION}
+GenericName=OpenRA - Editor
+Name=OpenRA ver. {VERSION} Map Editor
 Icon=openra
 Path=/usr/share/openra
-Exec="mono OpenRA.Editor.exe --settings-value ~/.openra"
+Exec=mono OpenRA.Editor.exe "--settings-value ~/.openra"
 Terminal=false
