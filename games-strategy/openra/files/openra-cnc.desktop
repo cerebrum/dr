@@ -5,6 +5,6 @@ GenericName=RTS Game
 Comment=The OpenRA (Gl) engine ver. {VERSION} running Command & Conquer
 Icon=openra
 Path=/usr/share/openra
-Exec=mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=cnc Graphics.Renderer=Gl
+Exec="mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=cnc Graphics.Renderer=Gl"
 Terminal=false
 Categories=Game;

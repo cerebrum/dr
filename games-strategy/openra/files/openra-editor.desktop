@@ -5,6 +5,6 @@ GenericName=RTS Game
 Comment=The OpenRA Map Editor ver. {VERSION}
 Icon=openra
 Path=/usr/share/openra
-Exec=mono OpenRA.Editor.exe --settings-value ~/.openra
+Exec="mono OpenRA.Editor.exe --settings-value ~/.openra"
 Terminal=false
 Categories=Game;

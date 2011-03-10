@@ -5,6 +5,6 @@ GenericName=RTS Game
 Comment=The OpenRA (Cg) engine ver. {VERSION} running Red Alert
 Icon=openra
 Path=/usr/share/openra
-Exec=mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=ra Graphics.Renderer=Cg
+Exec="mono OpenRA.Game.exe SupportDir=~/.openra UtilityPath=OpenRA.Utility.sh Game.Mods=ra Graphics.Renderer=Cg"
 Terminal=false
 Categories=Game;
