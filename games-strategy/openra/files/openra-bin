@@ -1,3 +1,0 @@
-#!/bin/sh
-cd /usr/share/openra
-mono /usr/share/openra/OpenRA.Game.exe SupportDir=~/.openra "$@"

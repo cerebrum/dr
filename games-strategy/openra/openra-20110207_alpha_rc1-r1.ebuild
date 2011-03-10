@@ -2,89 +2,88 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
+
 inherit versionator eutils #flag-o-matic
 
 MY_PV=$(get_major_version)
-VERSION="${MY_PV}"
+VERSION="release-${MY_PV}"
+#VERSION="playtest-${MY_PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
-HOMEPAGE="http://openra.res0l.net/"
-SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/release-${VERSION}"
-#SRC_URI="https://www.github.com/OpenRA/OpenRA/zipball/playtest-${VERSION}"
-#SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/playtest-${VERSION}"
+#HOMEPAGE="http://openra.res0l.net/"
+HOMEPAGE="http://open-ra.org/"
+SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}
+			 -> ${PN}-${VERSION}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-#video_cards_nvidia
 IUSE="cg ra cnc"
-#net-libs/libmicrohttpd
-#net-libs/webkit-gtk
 DEPEND="cg? (
 	>=media-gfx/nvidia-cg-toolkit-2
 	)
-	dev-lang/mono
+	>=dev-lang/mono-2.6.7
 	media-libs/mesa
 	media-libs/freetype
 	>=media-libs/openal-1.1
 	>=media-libs/libsdl-1.2"
 RDEPEND="${DEPEND}"
-INSTALL_PREFIX="/usr"
-INSTALL_DIR="${INSTALL_PREFIX}/share/${PN}"
-INSTALL_DIR_BIN="${INSTALL_PREFIX}/bin"
-ICON_DIR="/usr/share/icons"
+
+PREFIX="/usr"
+DATA_ROOT_DIR="${PREFIX}/share"
+INSTALL_DIR="${DATA_ROOT_DIR}/${PN}"
+INSTALL_DIR_BIN="${PREFIX}/bin"
+ICON_DIR="${DATA_ROOT_DIR}/icons"
+DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
+
 
 src_unpack() {
-	cp "${DISTDIR}/${A}" "${T}/${A}.tar.gz"
-	cd "${T}"
-	unpack "./${A}.tar.gz"
-	OPENRADIR="`ls -d OpenRA-OpenRA-*`"
-	mv ${OPENRADIR} "${WORKDIR}/"
+	unpack "${A}"
+	mv OpenRA-OpenRA-* "${S}"
 }
 
 src_compile() {
-	cd ${OPENRADIR}
-	epatch "${FILESDIR}/openra-20110127-patch.diff"
-	#econf || die "econf failed in ${S}"
-	#emake CFLAGS="${CFLAGS}" || die "emake failed in ${S}"
-	emake || die "emake failed in ${S}"
+	epatch "${FILESDIR}/ramusic.patch"
+	emake PREFIX="${PREFIX}" || die "emake failed in ${S}"
 }
 
 src_install() {
-	cd ${OPENRADIR}
 	# Update mod versions
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/ra/mod.yaml
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/cnc/mod.yaml
 	#filter-ldflags -s
 	#emake DESTDIR="${D}" LDFLAGS="${LDFLAGS}" install || die "Install failed"
-	emake DESTDIR="${D}" install || die "Install failed"
-	exeinto "${INSTALL_DIR_BIN}"
-	doexe ${FILESDIR}/openra-bin || die "Install of openra-bin failed"
+	emake PREFIX="${PREFIX}" DESTDIR="${D}" install || die "Install failed"
+	#exeinto "${INSTALL_DIR_BIN}"
+	#doexe packaging/linux/openra-bin || die "Install of openra-bin failed"
 	exeinto "${INSTALL_DIR}"
-	doexe ${FILESDIR}/inst_tao_deps.sh || die "Install of inst_tao_deps.sh failed"
-	# Remove unneeded files
-	#rm OpenRA.Launcher.exe
+	doexe packaging/linux/OpenRA.Utility.sh || die "Install of OpenRA.Utility.sh failed"
+	# Move Tao libraries to correct place and remove empty dirs
+	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
+	rm -rv ${D}${INSTALL_DIR}/thirdparty
 	# Desktop Icons
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
 	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
-	#sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-gtklauncher.desktop > openra-gtklauncher.desktop
-	domenu openra-ra.desktop openra-cnc.desktop #openra-gtklauncher.desktop
+	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-editor.desktop > openra-editor.desktop
+	domenu openra-ra.desktop openra-cnc.desktop openra-editor.desktop
 	if use cg ; then
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
 		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
 		domenu openra-ra-cg.desktop openra-cnc-cg.desktop
 	fi
 	# Icon images
-	#doicon packaging/linux/openra.32.xpm
 	insinto ${ICON_DIR}
 	doins -r packaging/linux/hicolor
+	# Desktop directory
+	insinto ${DESK_DIR}
+	doins ${FILESDIR}/openra.directory
+	# Desktop menu
+	insinto "$XDG_CONFIG_DIRS/menus/applications-merged"
+	doins ${FILESDIR}/games-openra.menu
 	dodoc COPYING HACKING CHANGELOG
 }
 
 pkg_postinst() {
-	#elog
-	#elog " You will need to install the Tao deps (.dll and .config) from the"
-	#elog " thirdparty/Tao dir permanently into your GAC with the following script:"
-	#elog " inst_tao_deps.sh (run in OpenRA dir)"
 	elog
 	elog " You may run the game from desktop games menu or just manually"
 	elog " run the game with \`mono OpenRA.Game.exe Game.Mods=ra\` for Red Alert"
@@ -169,5 +168,4 @@ pkg_postinst() {
 	elog " http://master.open-ra.org/list.php"
 	elog
 	update-desktop-database
-	/bin/bash inst_tao_deps.sh
 }

@@ -1,9 +1,10 @@
 [Desktop Entry]
 Type=Application
-Version={VERSION}
 Name=OpenRA - Editor
-Comment=The OpenRA RTS Map Editor
+GenericName=RTS Game
+Comment=The OpenRA Map Editor ver. {VERSION}
 Icon=openra
-Exec=cd /usr/share/openra && mono /usr/share/openra/OpenRA.Editor.exe
+Path=/usr/share/openra
+Exec=mono OpenRA.Editor.exe --settings-value ~/.openra
 Terminal=false
 Categories=Game;

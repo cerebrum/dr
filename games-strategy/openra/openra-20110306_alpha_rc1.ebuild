@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
+
 inherit versionator eutils #flag-o-matic
 
 MY_PV=$(get_major_version)
@@ -9,15 +11,14 @@ MY_PV=$(get_major_version)
 VERSION="playtest-${MY_PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
-HOMEPAGE="http://openra.res0l.net/"
-SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}"
+#HOMEPAGE="http://openra.res0l.net/"
+HOMEPAGE="http://open-ra.org/"
+SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}
+			 -> ${PN}-${VERSION}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-#video_cards_nvidia
 IUSE="cg ra cnc"
-#net-libs/libmicrohttpd
-#net-libs/webkit-gtk
 DEPEND="cg? (
 	>=media-gfx/nvidia-cg-toolkit-2
 	)
@@ -27,40 +28,37 @@ DEPEND="cg? (
 	>=media-libs/openal-1.1
 	>=media-libs/libsdl-1.2"
 RDEPEND="${DEPEND}"
-INSTALL_PREFIX="/usr"
-INSTALL_DIR="${INSTALL_PREFIX}/share/${PN}"
-INSTALL_DIR_BIN="${INSTALL_PREFIX}/bin"
-ICON_DIR="/usr/share/icons"
+
+PREFIX="/usr"
+DATA_ROOT_DIR="${PREFIX}/share"
+INSTALL_DIR="${DATA_ROOT_DIR}/${PN}"
+INSTALL_DIR_BIN="${PREFIX}/bin"
+ICON_DIR="${DATA_ROOT_DIR}/icons"
+DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
+
 
 src_unpack() {
-	cp "${DISTDIR}/${A}" "${T}/${A}.tar.gz"
-	cd "${T}"
-	unpack "./${A}.tar.gz"
-	OPENRADIR="`ls -d OpenRA-OpenRA-*`"
-	mv ${OPENRADIR} "${WORKDIR}/"
+	unpack "${A}"
+	mv OpenRA-OpenRA-* "${S}"
 }
 
 src_compile() {
-	cd ${OPENRADIR}
-	epatch "${FILESDIR}/openra-20110127-patch.diff"
 	epatch "${FILESDIR}/ramusic.patch"
-	#econf || die "econf failed in ${S}"
-	#emake CFLAGS="${CFLAGS}" || die "emake failed in ${S}"
-	emake || die "emake failed in ${S}"
+	emake PREFIX="${PREFIX}" || die "emake failed in ${S}"
 }
 
 src_install() {
-	cd ${OPENRADIR}
 	# Update mod versions
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/ra/mod.yaml
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/cnc/mod.yaml
 	#filter-ldflags -s
 	#emake DESTDIR="${D}" LDFLAGS="${LDFLAGS}" install || die "Install failed"
-	emake DESTDIR="${D}" install || die "Install failed"
-	exeinto "${INSTALL_DIR_BIN}"
-	doexe packaging/linux/openra-bin || die "Install of openra-bin failed"
+	emake PREFIX="${PREFIX}" DESTDIR="${D}" install || die "Install failed"
+	#exeinto "${INSTALL_DIR_BIN}"
+	#doexe packaging/linux/openra-bin || die "Install of openra-bin failed"
 	exeinto "${INSTALL_DIR}"
 	doexe packaging/linux/OpenRA.Utility.sh || die "Install of OpenRA.Utility.sh failed"
+	# Move Tao libraries to correct place and remove empty dirs
 	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
 	rm -rv ${D}${INSTALL_DIR}/thirdparty
 	# Desktop Icons
@@ -76,6 +74,12 @@ src_install() {
 	# Icon images
 	insinto ${ICON_DIR}
 	doins -r packaging/linux/hicolor
+	# Desktop directory
+	insinto ${DESK_DIR}
+	doins ${FILESDIR}/openra.directory
+	# Desktop menu
+	insinto "$XDG_CONFIG_DIRS/menus/applications-merged"
+	doins ${FILESDIR}/games-openra.menu
 	dodoc COPYING HACKING CHANGELOG
 }
 
