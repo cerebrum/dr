@@ -4,5 +4,5 @@ GenericName=OpenRA - Editor
 Name=OpenRA ver. {VERSION} Map Editor
 Icon=openra
 Path=/usr/share/openra
-Exec=mono OpenRA.Editor.exe "--settings-value ~/.openra"
+Exec=mono OpenRA.Editor.exe
 Terminal=false
