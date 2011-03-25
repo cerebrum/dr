@@ -1,0 +1,32 @@
+diff -ur OpenRA-OpenRA-a745f3d/OpenRA.Game/Widgets/TextFieldWidget.cs OpenRA-OpenRA-new/OpenRA.Game/Widgets/TextFieldWidget.cs
+--- OpenRA-OpenRA-a745f3d/OpenRA.Game/Widgets/TextFieldWidget.cs	2011-03-19 22:47:54.000000000 +0300
++++ OpenRA-OpenRA-new/OpenRA.Game/Widgets/TextFieldWidget.cs	2011-03-25 17:11:49.606256024 +0300
+@@ -108,7 +108,14 @@
+ 
+ 				return true;
+ 			}
++			
++			if (e.KeyName == "home")
++			{
++				CursorPosition = 0;
+ 
++				return true;
++			}
++			
+ 			if (e.KeyName == "right")
+ 			{
+ 				if (CursorPosition <= Text.Length-1)
+@@ -116,6 +123,13 @@
+ 
+ 				return true;
+ 			}
++			
++			if (e.KeyName == "end")
++			{
++				CursorPosition = Text.Length;
++
++				return true;
++			}
+ 
+ 			if (e.KeyName == "delete")
+ 			{
