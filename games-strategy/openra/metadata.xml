@@ -2,7 +2,9 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
   <herd>no-herd</herd>
-
+<maintainer>
+	<email>energumenoster@gmail.com</email>
+</maintainer>
   <use>
   <flag name='cg'>Enable support of old renderer through NVidia Cg</flag>
   <flag name='ra'>Download &amp; Install RA mod packages from internet</flag>

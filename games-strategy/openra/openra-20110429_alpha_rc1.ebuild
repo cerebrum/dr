@@ -11,7 +11,6 @@ MY_PV=$(get_major_version)
 VERSION="playtest-${MY_PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
-#HOMEPAGE="http://openra.res0l.net/"
 HOMEPAGE="http://open-ra.org/"
 SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}
 			 -> ${PN}-${VERSION}.tar.gz"
