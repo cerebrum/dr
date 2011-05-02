@@ -44,6 +44,11 @@ src_prepare() {
 	rm -v ${DATA_ROOT_DIR}/applications/openra.desktop
 	# Move program files to correct binary location
 	mv -v ${DATA_ROOT_DIR}/openra ${INSTALL_DIR}
+	mv -v ${ICON_DIR}/hicolor/16x16/apps/openra.png ${ICON_DIR}/hicolor/16x16/apps/openra-bin.png
+	mv -v ${ICON_DIR}/hicolor/32x32/apps/openra.png ${ICON_DIR}/hicolor/32x32/apps/openra-bin.png
+	mv -v ${ICON_DIR}/hicolor/64x64/apps/openra.png ${ICON_DIR}/hicolor/64x64/apps/openra-bin.png
+	mv -v ${ICON_DIR}/hicolor/48x48/apps/openra.png ${ICON_DIR}/hicolor/48x48/apps/openra-bin.png
+	mv -v ${ICON_DIR}/hicolor/128x128/apps/openra.png ${ICON_DIR}/hicolor/128x128/apps/openra-bin.png
 }
 
 src_install() {
@@ -59,7 +64,7 @@ src_install() {
 	fi
 	# Icon images
 	insinto ${ICON_DIR}
-	doins -r ${DATA_ROOT_DIR}/icons/hicolor
+	doins -r ${ICON_DIR}/hicolor
 	# Desktop directory
 	insinto /${DESK_DIR}
 	doins ${FILESDIR}/openra-bin.directory
