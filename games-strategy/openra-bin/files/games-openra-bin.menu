@@ -1,0 +1,19 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+"http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+<Menu>
+  <Name>Applications</Name>
+  <Menu>
+    <Name>Games</Name>
+  <Menu>
+    <Name>OpenRA-Bin</Name>
+    <Directory>openra-bin.directory</Directory>
+    <Include>
+      <Filename>openra-bin-cnc-cg.desktop</Filename>
+      <Filename>openra-bin-cnc.desktop</Filename>
+      <Filename>openra-bin-editor.desktop</Filename>
+      <Filename>openra-bin-ra-cg.desktop</Filename>
+      <Filename>openra-bin-ra.desktop</Filename>
+    </Include>
+  </Menu>
+  </Menu>
+</Menu>

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+GenericName=OpenRA-Bin - Command & Conquer (Gl)
+Name=OpenRA ver. {VERSION} (Gl Renderer)
+Icon=openra
+Path=/usr/share/openra-bin
+Exec=mono OpenRA.Game.exe "SupportDir=~/.openra-bin" UtilityPath=OpenRA.Utility.sh Game.Mods=cnc Graphics.Renderer=Gl
+Terminal=false

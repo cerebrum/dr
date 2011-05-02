@@ -1,0 +1,16 @@
+diff -ur 2/usr/share/openra/mods/ra/music.yaml 1/usr/share/openra/mods/ra/music.yaml
+--- 2/usr/share/openra/mods/ra/music.yaml	2011-02-28 12:47:39.000000000 +0300
++++ 1/usr/share/openra/mods/ra/music.yaml	2011-02-26 04:48:32.000000000 +0300
+@@ -1,3 +1,5 @@
++intro: Intro
++map: Map
+ await_r: Afterlife
+ bigf226m: Bigfoot
+ credits: End Credits
+@@ -18,4 +20,4 @@
+ tren226m: Trenches
+ twin: Twin
+ vector1a: Vector
+-work226m: Workmen
+\ No newline at end of file
++work226m: Workmen
