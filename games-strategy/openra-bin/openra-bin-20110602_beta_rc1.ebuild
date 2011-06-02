@@ -8,8 +8,9 @@ inherit versionator eutils #flag-o-matic
 
 MY_PV=$(get_major_version)
 #VERSION="release-${MY_PV}"
-VERSION="playtest-${MY_PV}-2"
-LVERSION="playtest.${MY_PV}.2"
+VERSION="playtest-${MY_PV}"
+#LVERSION="release.${MY_PV}"
+LVERSION="playtest.${MY_PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://open-ra.org/"
