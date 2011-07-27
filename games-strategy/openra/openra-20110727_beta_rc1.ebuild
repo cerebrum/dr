@@ -59,7 +59,6 @@ src_install() {
 	exeinto "${INSTALL_DIR}"
 	doexe packaging/linux/OpenRA.Utility.sh || die "Install of OpenRA.Utility.sh failed"
 	# Move Tao libraries to correct place and remove empty dirs
-	mv -v ${D}${INSTALL_DIR}/thirdparty/ICSharpCode.SharpZipLib.dll ${D}${INSTALL_DIR}/
 	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
 	rm -rv ${D}${INSTALL_DIR}/thirdparty
 	# Remove old and unnecessary wrapper script
