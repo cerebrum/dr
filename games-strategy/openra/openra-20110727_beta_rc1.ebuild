@@ -59,6 +59,7 @@ src_install() {
 	exeinto "${INSTALL_DIR}"
 	doexe packaging/linux/OpenRA.Utility.sh || die "Install of OpenRA.Utility.sh failed"
 	# Move Tao libraries to correct place and remove empty dirs
+	mv -v ${D}${INSTALL_DIR}/thirdparty/ICSharpCode.SharpZipLib.dll ${D}${INSTALL_DIR}/
 	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
 	rm -rv ${D}${INSTALL_DIR}/thirdparty
 	# Remove old and unnecessary wrapper script
@@ -164,7 +165,7 @@ pkg_postinst() {
 	elog " If you have a case-sensitive filesystem you must change the filenames to"
 	elog " lower case."
 	elog
-	elog " Please note: OpenRA is currently at an beta release stage. Releases may"
+	elog " Please note: OpenRA is currently at a beta release stage. Releases may"
 	elog " be buggy or unstable. If you have any problems, please report them to the"
 	elog " IRC channel (#openra on irc.freenode.net) or to the bug-tracker"
 	elog " (http://bugs.open-ra.org)."
