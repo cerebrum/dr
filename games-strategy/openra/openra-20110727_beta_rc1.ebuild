@@ -58,7 +58,7 @@ src_install() {
 	#exeinto "${INSTALL_DIR_BIN}"
 	#doexe packaging/linux/openra-bin || die "Install of openra-bin failed"
 	exeinto "${INSTALL_DIR}"
-	doexe packaging/linux/OpenRA.Utility.sh || die "Install of OpenRA.Utility.sh failed"
+	#doexe packaging/linux/OpenRA.Utility.sh || die "Install of OpenRA.Utility.sh failed"
 	# Move Tao libraries to correct place and remove empty dirs
 	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
 	rm -rv ${D}${INSTALL_DIR}/thirdparty
