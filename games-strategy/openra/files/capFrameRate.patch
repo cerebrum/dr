@@ -1,7 +1,7 @@
 diff -ur OpenRA-OpenRA-c84f53c/OpenRA.Game/Game.cs OpenRA-OpenRA-c84f53c-new/OpenRA.Game/Game.cs
 --- OpenRA-OpenRA-c84f53c/OpenRA.Game/Game.cs	2011-07-27 13:48:32.000000000 +0400
-+++ OpenRA-OpenRA-c84f53c-new/OpenRA.Game/Game.cs	2011-08-02 23:09:16.722267918 +0400
-@@ -322,10 +322,26 @@
++++ OpenRA-OpenRA-c84f53c-new/OpenRA.Game/Game.cs	2011-08-03 01:27:26.916606131 +0400
+@@ -322,10 +322,25 @@
  
  		static bool quit;
  		public static event Action OnQuit = () => {};
@@ -9,14 +9,13 @@ diff -ur OpenRA-OpenRA-c84f53c/OpenRA.Game/Game.cs OpenRA-OpenRA-c84f53c-new/Ope
  		internal static void Run()
  		{
 +			ushort mSecToWaitInCycle = (ushort) (1000/Settings.Graphics.FrameRate);
-+			System.Diagnostics.Stopwatch sw;
 +			
  			while (!quit)
 +			{
-+				sw = System.Diagnostics.Stopwatch.StartNew();
++				var sw = System.Diagnostics.Stopwatch.StartNew();
  				Tick( orderManager, viewport );
-+				if ( (Settings.Graphics.CapFrameRate == true) && (sw.Elapsed.TotalMilliseconds < mSecToWaitInCycle ) )
-+				{
++				if ( Settings.Graphics.CapFrameRate && (sw.Elapsed.TotalMilliseconds < mSecToWaitInCycle ) )
++				{//Use Thread.Sleep(mSecToWaitInCycle - sw.Elapsed.TotalMilliseconds) but find a better sleep func at first
 +					while (true)
 +					{
 +						if (sw.Elapsed.TotalMilliseconds >= mSecToWaitInCycle)
