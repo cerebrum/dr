@@ -4,5 +4,5 @@ GenericName=OpenRA - Red Alert (Cg)
 Name=OpenRA ver. {VERSION} (Cg Renderer)
 Icon=openra
 Path=/usr/share/openra
-Exec=mono OpenRA.Game.exe UtilityPath=OpenRA.Utility.sh Game.Mods=ra Graphics.Renderer=Cg
+Exec=mono OpenRA.Game.exe Game.Mods=ra Graphics.Renderer=Cg
 Terminal=false

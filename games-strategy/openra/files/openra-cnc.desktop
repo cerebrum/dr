@@ -4,5 +4,5 @@ GenericName=OpenRA - Command & Conquer (Gl)
 Name=OpenRA ver. {VERSION} (Gl Renderer)
 Icon=openra
 Path=/usr/share/openra
-Exec=mono OpenRA.Game.exe UtilityPath=OpenRA.Utility.sh Game.Mods=cnc Graphics.Renderer=Gl
+Exec=mono OpenRA.Game.exe Game.Mods=cnc Graphics.Renderer=Gl
 Terminal=false
