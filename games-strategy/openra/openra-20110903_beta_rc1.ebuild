@@ -44,7 +44,6 @@ src_unpack() {
 src_compile() {
 	epatch "${FILESDIR}/fix-prefix.patch"
 	epatch "${FILESDIR}/ramusic.patch"
-	epatch "${FILESDIR}/Makefile_rsdl.patch"
 	epatch "${FILESDIR}/capFrameRate.patch"
 	emake || die "emake failed in ${S}"
 }
