@@ -8,9 +8,9 @@ inherit versionator eutils #flag-o-matic
 
 MY_PV=$(get_major_version)
 VERSION="release-${MY_PV}"
-#VERSION="playtest-${MY_PV}-2"
+#VERSION="playtest-${MY_PV}"
 LVERSION="release.${MY_PV}"
-#LVERSION="playtest.${MY_PV}.2"
+#LVERSION="playtest.${MY_PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://open-ra.org/"
@@ -96,10 +96,13 @@ pkg_postinst() {
 			mono OpenRA.Utility.exe --extract-zip=/tmp/ra-packages.zip,ra/packages/
 	else
 		elog
-		elog " The RA packages will need to be manually extracted to mods/ra/packages/"
-		elog " before the RA mod will work. You may try to download pack from our site"
+		elog " The RA packages will need to be extracted to /home/<user>/.openra/Content/ra/"
+		elog " before the RA mod will actually work. You may execute OpenRA and it will"
+		elog " suggest to download content from CD or from OpenRA site automatically."
+		elog " You may also try to download minimal content pack from OpenRA site manually:"
 		elog " http://open-ra.org/get-dependency.php?file=ra-packages"
-		elog " But the better choise is to download full pack from original game iso."
+		elog " But the better choice is to download full pack from original game CD or iso."
+		elog " However, full CD pack usage result in slower game start from OpenRA Lobby."
 		elog
 		elog " The required files for the Red Alert mod are:"
 		elog " EITHER:"
@@ -122,10 +125,14 @@ pkg_postinst() {
 			mono OpenRA.Utility.exe --extract-zip=/tmp/cnc-packages.zip,cnc/packages/
 	else
 		elog
-		elog " The C&C packages will need to be manually extracted to mods/cnc/packages/"
-		elog " before the C&C mod will work. You may try to download pack from our site"
+
+		elog " The C&C packages will need to be extracted to /home/<user>/.openra/Contet/cnc/"
+		elog " before the C&C mod will actually work. You may execute OpenRA and it will"
+		elog " suggest to download content from CD or from OpenRA site automatically."
+		elog " You may also try to download minimal content pack from OpenRA site manually:"
 		elog " http://open-ra.org/get-dependency.php?file=cnc-packages"
-		elog " But the better choise is to download full pack from original game iso."
+		elog " But the better choice is to download full pack from original game CD or iso."
+		elog " However, full CD pack usage result in slower game start from OpenRA Lobby."
 		elog
 		elog " The required files for the Command and Conquer mod are:"
 		elog "	* cclocal.mix"
@@ -139,23 +146,20 @@ pkg_postinst() {
 		elog
 	fi
 	elog
-	elog " Red Alert and C&C have been released by EA Games as freeware. They can be"
+	elog " Red Alert and C&C have been released by EA Games as freeware. They could be"
 	elog " downloaded from http://www.commandandconquer.com/classic"
 	elog " Unfortunately the installer is 16-bit and so won’t run on 64-bit operating"
-	elog " systems. This can be worked around by using the Red Alert Setup Manager "
-	elog "	(http://ra.afraid.org/html/downloads/utilities-3.html). "
-	elog " Make sure you apply the no-CD protection fix so all the files needed "
+	elog " systems. This can be worked around by using the Red Alert Setup Manager"
+	elog "	(http://ra.afraid.org/html/downloads/utilities-3.html)."
+	elog " Make sure you apply the no-CD protection fix so all the files needed"
 	elog " are installed to the hard drive."
 	elog
 	elog " If you have a case-sensitive filesystem you must change the filenames to"
 	elog " lower case."
 	elog
-	elog " OpenRA is incompatible with Compiz, please disable desktop effects"
-	elog " when trying to run OpenRA or the game will crash."
-	elog
-	elog " Please note: OpenRA is currently at an alpha release stage. Releases may"
+	elog " Please note: OpenRA is currently at a beta release stage. Releases may"
 	elog " be buggy or unstable. If you have any problems, please report them to the"
-	elog " IRC channel (#openra on irc.freenode.net) or the bug-tracker"
+	elog " IRC channel (#openra on irc.freenode.net) or to the bug-tracker"
 	elog " (http://bugs.open-ra.org)."
 	elog
 	elog " You may also see servers list with"
