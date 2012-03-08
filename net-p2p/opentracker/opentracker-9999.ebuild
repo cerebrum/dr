@@ -3,27 +3,29 @@
 # $Header: $
 
 EAPI=4
-inherit cvs
 
-ECVS_USER="anoncvs"
-ECVS_SERVER="cvs.erdgeist.org:/home/cvsroot"
-ECVS_MODULE="opentracker"
+if [[ ${PV} = 9999* ]]; then
+	GIT="git-2"
+	EGIT_REPO_URI="git://github.com/wereHamster/opentracker.git"
+	inherit ${GIT}
+	SRC_URI=""
+	KEYWORDS=""
+fi
 
 DESCRIPTION="An open and free bittorrent tracker"
 HOMEPAGE="http://erdgeist.org/arts/software/opentracker/"
 
 LICENSE="BEER-WARE"
 SLOT="0"
-KEYWORDS=""
 #TODO set (+)default and exclusivity (blacklist, ...)
 IUSE="blacklist debug gzip ipv6 live-sync log-network restrict-stats syslog whitelist"
 
-DEPEND="dev-libs/dietlibc
-		>=dev-libs/libowfat-0.27"
+DEPEND="dev-libs/dietlibc"
+		#>=dev-libs/libowfat-0.27"
 # dietlibc make static binary
 RDEPEND=""
 
-S=${WORKDIR}/${ECVS_MODULE}
+#S=${WORKDIR}/${ECVS_MODULE}
 
 src_compile() {
 	# TODO: are we safe with a simple sed failure ?xs
