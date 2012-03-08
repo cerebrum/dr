@@ -44,6 +44,7 @@ src_compile() {
 	use blacklist && use whitelist && die "USE blacklist and whitelist are exclusive"
 	use blacklist && sed -i '/DWANT_ACCESSLIST_BLACK/s/^#*//' Makefile
 	use whitelist && sed -i '/DWANT_ACCESSLIST_WHITE/s/^#*//' Makefile
+	use !debug && sed -i '/D_DEBUG/s/^#*//' Makefile
 	use gzip && sed -i '/DWANT_COMPRESSION_GZIP/s/^#*//' Makefile
 	use restrict-stats && sed -i '/DWANT_RESTRICT_STATS/s/^#*//' Makefile
 	use live-sync && sed -i '/DWANT_SYNC_LIVE/s/^#*//' Makefile
