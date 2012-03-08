@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>no-herd</herd>
+<maintainer>
+  <email>maintainer-wanted@gentoo.org</email>
+</maintainer>
+<longdescription>opentracker is a open and free bittorrent tracker project. It aims for minimal resource usage and is intended to run at your wlan router.</longdescription>
+<use>
+  <flag name='blacklist'>Make use of a torrents black-list</flag>
+  <flag name='whitelist'>Make use of a torrents white-list</flag>
+  <flag name='gzip'>Deliver gzip compressed full scrapes</flag>
+  <flag name='restrict-stats'>Restrict statistics to the tracker owner</flag>
+  <flag name='live-sync'>Allow synchronisation between several instances</flag>
+  <flag name='log-network'>Log network traffic</flag>
+  <flag name='syslog'>Log to syslog</flag>
+</use>
+</pkgmetadata>
