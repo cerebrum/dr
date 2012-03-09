@@ -26,7 +26,7 @@ RDEPEND=""
 
 src_compile() {
 	# TODO: are we safe with a simple sed failure ?xs
-	[[ -z Makefile ]]
+	[[ -z Makefile ]] && die "No Makefile found"
 	# fix use of FEATURES, so it's not mixed up with portage's FEATURES (#214969)
 	nonfatal sed -i \
 		-e "s|FEATURES|FEATURES_INTERNAL|g" \

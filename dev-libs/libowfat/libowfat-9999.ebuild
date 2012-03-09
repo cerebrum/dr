@@ -28,7 +28,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	[[ -z GNUmakefile ]] || die "No GNUmakefile found"
+	[[ -z GNUmakefile ]] && die "No GNUmakefile found"
 	sed -i \
 		-e "s:^CFLAGS.*:CFLAGS=-I. ${CFLAGS}:" \
 		-e "s:^DIET.*:DIET?=/usr/bin/diet -Os:" \
