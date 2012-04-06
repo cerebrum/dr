@@ -43,14 +43,14 @@ src_unpack() {
 src_compile() {
 	#epatch "${FILESDIR}/fix-prefix.patch"
 	#epatch "${FILESDIR}/ramusic.patch"
-	emake PREFIX="/usr" || die "emake failed in ${S}"
+	emake prefix="/usr" || die "emake failed in ${S}"
 }
 
 src_install() {
 	# Update mod versions
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/ra/mod.yaml
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/cnc/mod.yaml
-	emake DESTDIR="${D}" install || die "Install failed"
+	emake prefix="/usr" DESTDIR="${D}" install || die "Install failed"
 	exeinto "${INSTALL_DIR}"
 	# Move Tao libraries to correct place and remove empty dirs
 	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
