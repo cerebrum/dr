@@ -43,7 +43,7 @@ src_unpack() {
 src_compile() {
 	#epatch "${FILESDIR}/fix-prefix.patch"
 	#epatch "${FILESDIR}/ramusic.patch"
-	emake || die "emake failed in ${S}"
+	emake PREFIX="/usr" || die "emake failed in ${S}"
 }
 
 src_install() {
