@@ -15,16 +15,15 @@ SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}
 			 -> ${PN}-${VERSION}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="cg ra cnc"
-DEPEND="cg? (
-	>=media-gfx/nvidia-cg-toolkit-2
-	)
-	>=dev-lang/mono-2.6.7
-	media-libs/mesa
-	media-libs/freetype
-	>=media-libs/openal-1.1
-	>=media-libs/libsdl-1.2"
+DEPEND="dev-lang/mono[-minimal]
+	media-libs/freetype:2[X]
+	media-libs/libsdl[X,video]
+	media-libs/openal
+	virtual/jpeg
+	virtual/opengl
+	cg? ( >=media-gfx/nvidia-cg-toolkit-2.1.0017 )"
 RDEPEND="${DEPEND}"
 
 PREFIX="/usr"
