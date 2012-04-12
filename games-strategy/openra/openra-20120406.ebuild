@@ -39,12 +39,6 @@ src_unpack() {
 	mv OpenRA-OpenRA-* "${S}"
 }
 
-src_compile() {
-	#epatch "${FILESDIR}/fix-prefix.patch"
-	#epatch "${FILESDIR}/ramusic.patch"
-	emake prefix="/usr" || die "emake failed in ${S}"
-}
-
 src_install() {
 	# Update mod versions
 	sed "s/{DEV_VERSION}/$VERSION/" -i mods/ra/mod.yaml
