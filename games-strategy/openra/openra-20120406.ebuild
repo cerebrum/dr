@@ -32,6 +32,7 @@ INSTALL_DIR="${DATA_ROOT_DIR}/${PN}"
 INSTALL_DIR_BIN="${PREFIX}/bin"
 ICON_DIR="${DATA_ROOT_DIR}/icons"
 DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
+DESK_APPS="${DATA_ROOT_DIR}/applications"
 
 
 src_unpack() {
@@ -40,36 +41,38 @@ src_unpack() {
 }
 
 src_install() {
-	# Update mod versions
-	sed "s/{DEV_VERSION}/$VERSION/" -i mods/ra/mod.yaml
-	sed "s/{DEV_VERSION}/$VERSION/" -i mods/cnc/mod.yaml
+	# Register game-version
+	sed \
+		-e "/Version/s/{DEV_VERSION}/$VERSION/" \
+		-i mods/{ra,cnc}/mod.yaml || die
 	emake prefix="/usr" DESTDIR="${D}" install || die "Install failed"
 	exeinto "${INSTALL_DIR}"
-	# Move Tao libraries to correct place and remove empty dirs
-	mv -v ${D}${INSTALL_DIR}/thirdparty/Tao/* ${D}${INSTALL_DIR}/
-	rm -rv ${D}${INSTALL_DIR}/thirdparty
 	# Remove old and unnecessary wrapper script
-	rm -v ${D}${INSTALL_DIR_BIN}/openra
-	# Desktop Icons
-	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra.desktop > openra-ra.desktop
-	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc.desktop > openra-cnc.desktop
-	sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-editor.desktop > openra-editor.desktop
-	domenu openra-ra.desktop openra-cnc.desktop openra-editor.desktop
+	rm -v ${D}${INSTALL_DIR_BIN}/${PN} || die
+	# Install Desktop Icons
+	domenu "${FILESDIR}"/${PN}-{cnc,editor,ra}.desktop || die
+	# Register game-version for Desktop Icons
+	sed \
+		-e "/Name/s/{VERSION}/${VERSION}/" \
+		-i "${D}/${DESK_APPS}"/${PN}-{cnc,editor,ra}.desktop || die
 	if use cg ; then
-		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-ra-cg.desktop > openra-ra-cg.desktop
-		sed "s/{VERSION}/${VERSION}/" ${FILESDIR}/openra-cnc-cg.desktop > openra-cnc-cg.desktop
-		domenu openra-ra-cg.desktop openra-cnc-cg.desktop
+		# Install Desktop Icons
+		domenu "${FILESDIR}"/${PN}-{cnc,ra}-cg.desktop || die
+		# Register game-version for Desktop Icons
+		sed \
+			-e "/Name/s/{VERSION}/${VERSION}/" \
+			-i "${D}/${DESK_APPS}"/${PN}-{cnc,ra}-cg.desktop || die
 	fi
 	# Icon images
 	insinto ${ICON_DIR}
-	doins -r packaging/linux/hicolor
+	doins -r packaging/linux/hicolor || die
 	# Desktop directory
 	insinto ${DESK_DIR}
-	doins ${FILESDIR}/openra.directory
+	doins ${FILESDIR}/${PN}.directory || die
 	# Desktop menu
 	insinto "$XDG_CONFIG_DIRS/menus/applications-merged"
-	doins ${FILESDIR}/games-openra.menu
-	dodoc COPYING HACKING CHANGELOG
+	doins ${FILESDIR}/games-${PN}.menu || die
+	dodoc README HACKING CHANGELOG COPYING || die
 }
 
 pkg_postinst() {
@@ -91,7 +94,7 @@ pkg_postinst() {
 			mono OpenRA.Utility.exe --extract-zip=/tmp/ra-packages.zip,ra/packages/
 	else
 		elog
-		elog " The RA packages will need to be extracted to /home/<user>/.openra/Content/ra/"
+		elog " The RA packages will need to be extracted to ~/.openra/Content/ra/"
 		elog " before the RA mod will actually work. You may execute OpenRA and it will"
                 elog " suggest to download content from CD or from OpenRA site automatically."
 		elog " You may also try to download minimal content pack from OpenRA site manually:"
@@ -120,7 +123,7 @@ pkg_postinst() {
 			mono OpenRA.Utility.exe --extract-zip=/tmp/cnc-packages.zip,cnc/packages/
 	else
 		elog
-		elog " The C&C packages will need to be extracted to /home/<user>/.openra/Contet/cnc/"
+		elog " The C&C packages will need to be extracted to ~/.openra/Contet/cnc/"
 		elog " before the C&C mod will actually work. You may execute OpenRA and it will"
 		elog " suggest to download content from CD or from OpenRA site automatically."
 		elog " You may also try to download minimal content pack from OpenRA site manually:"
