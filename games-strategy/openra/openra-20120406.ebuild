@@ -4,20 +4,26 @@
 
 EAPI="2"
 
-inherit eutils
+inherit eutils mono git-2
 
 #VERSION="release-${PV}"
 VERSION="playtest-${PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://open-ra.org/"
-SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}
-			 -> ${PN}-${VERSION}.tar.gz"
+
+EGIT_REPO_URI="git://github.com/OpenRA/OpenRA.git"
+#EGIT_BRANCH="master"
+EGIT_BRANCH="next"
+EGIT_COMMIT="${VERSION}"
+
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="cg ra cnc"
+
 DEPEND="dev-lang/mono[-minimal]
+	!games-strategy/openra-bin
 	media-libs/freetype:2[X]
 	media-libs/libsdl[X,video]
 	media-libs/openal
@@ -34,16 +40,10 @@ ICON_DIR="${DATA_ROOT_DIR}/icons"
 DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
 DESK_APPS="${DATA_ROOT_DIR}/applications"
 
-
-src_unpack() {
-	unpack "${A}"
-	mv OpenRA-OpenRA-* "${S}"
-}
-
 src_install() {
 	# Register game-version
 	sed \
-		-e "/Version/s/{DEV_VERSION}/$VERSION/" \
+		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
 		-i mods/{ra,cnc}/mod.yaml || die
 	emake prefix="/usr" DESTDIR="${D}" install || die "Install failed"
 	exeinto "${INSTALL_DIR}"
