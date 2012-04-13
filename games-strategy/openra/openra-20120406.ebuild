@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -45,7 +45,7 @@ src_install() {
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
 		-i mods/{ra,cnc}/mod.yaml || die
-	emake prefix="/usr" DESTDIR="${D}" install || die "Install failed"
+	emake prefix="${PREFIX}" DESTDIR="${D}" install || die "Install failed"
 	exeinto "${INSTALL_DIR}"
 	# Remove old and unnecessary wrapper script
 	rm -v ${D}${INSTALL_DIR_BIN}/${PN} || die
