@@ -10,12 +10,14 @@ or `mono OpenRA.Game.exe Game.Mods=cnc` for Command & Conquer.
 
 If you have problems starting the game consider switching to
 alternative Cg Renderer. You may run the game with alternative
-Cg Graphics Renderer by adding `Graphics.Renderer=Cg` parameter
-to above commands (convenient for some integrated graphics cards).
+Cg Graphics Renderer from desktop games menu or by adding
+`Graphics.Renderer=Cg` parameter explicitly to above console commands
+ (convenient for some integrated graphics cards).
 To run explicitly with a default one use `Graphics.Renderer=Gl`
 parameter. The default Graphics Renderer is a better one, so
 don't forget to upgrade your graphics hardware drivers to the
-latest version.
+latest version. For Cg renderer also try to upgrade nvidia-cg-toolkit
+too. 
 
 The RA packages will need to be extracted to ~/.openra/Content/ra/
 before the RA mod will actually work. The C&C packages will need
@@ -69,6 +71,7 @@ If you have a case-sensitive filesystem you must change the filenames to
 lower case.
 
 Red Alert and C&C have been released by EA Games as freeware. They could be
+downloaded from http://www.commandandconquer.com/classic
 Unfortunately the installer is 16-bit and so won’t run on 64-bit operating
 systems. This can be worked around by using the Red Alert Setup Manager
  (http://ra.afraid.org/html/downloads/utilities-3.html).
