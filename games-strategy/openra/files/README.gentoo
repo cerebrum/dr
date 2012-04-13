@@ -75,6 +75,16 @@ systems. This can be worked around by using the Red Alert Setup Manager
 Make sure you apply the no-CD protection fix so all the files needed
 are installed to the hard drive.
 
+If your notebook doesn't show long battery life under OpenRA load you can
+do several things:
+1. Turn off "Show Shellmap" item under General tab of Settings menu.
+2. Edit ~/.openra/settings.yaml in the "Graphics:" section to add
+framelimiter. Add "CapFramerate: True" string there to enable framelimiter.
+The default setting is 60 frames per second. You can change it's value by
+adding "MaxFramerate: 70", for example, string in that section. Be careful
+with special tab symbols at the beginning of the strings. Don't forget to
+backup your settings file.
+
 Please note: OpenRA has 2 types of released versions:
 1. Release Versions or just Versions.
 2. Unstable Playtests Versions or just Playtests.
