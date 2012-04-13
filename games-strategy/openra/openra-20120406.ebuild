@@ -20,7 +20,7 @@ EGIT_COMMIT="${VERSION}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cg ra cnc"
+IUSE="cg"
 
 DEPEND="dev-lang/mono[-minimal]
 	!games-strategy/openra-bin
