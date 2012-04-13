@@ -47,8 +47,8 @@ src_install() {
 		-i mods/{ra,cnc}/mod.yaml || die
 	emake prefix="${PREFIX}" DESTDIR="${D}" install || die "Install failed"
 	exeinto "${INSTALL_DIR}"
-	# Remove old and unnecessary wrapper script
-	rm -v ${D}${INSTALL_DIR_BIN}/${PN} || die
+	# Remove old and unnecessary wrapper scripts
+	rm -v ${D}${INSTALL_DIR_BIN}/${PN}{,-editor} || die
 	# Install Desktop Icons
 	domenu "${FILESDIR}"/${PN}-{cnc,editor,ra}.desktop || die
 	# Register game-version for Desktop Icons
