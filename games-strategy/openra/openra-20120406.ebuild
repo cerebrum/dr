@@ -45,10 +45,14 @@ src_install() {
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
 		-i mods/{ra,cnc}/mod.yaml || die
-	emake prefix="${PREFIX}" DESTDIR="${D}" install || die "Install failed"
+	emake \
+		prefix="${PREFIX}" \
+		datarootdir="${DATA_ROOT_DIR}" \
+		datadir="${DATA_ROOT_DIR}" \
+		bindir="${INSTALL_DIR_BIN}" \
+		DESTDIR="${D}" \
+		install || die "Install failed"
 	exeinto "${INSTALL_DIR}"
-	# Remove old and unnecessary wrapper scripts
-	rm -v ${D}${INSTALL_DIR_BIN}/${PN}{,-editor} || die
 	# Install Desktop Icons
 	domenu "${FILESDIR}"/${PN}-{cnc,editor,ra}.desktop || die
 	# Register game-version for Desktop Icons
