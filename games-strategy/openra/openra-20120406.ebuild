@@ -20,7 +20,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE="cg"
 
 DEPEND="dev-lang/mono[-minimal]
-	!games-strategy/openra-bin
 	media-libs/freetype:2[X]
 	media-libs/libsdl[X,video]
 	media-libs/openal
