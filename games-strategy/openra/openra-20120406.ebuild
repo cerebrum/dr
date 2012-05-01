@@ -53,7 +53,7 @@ src_install() {
 		bindir="${INSTALL_DIR_BIN}" \
 		DESTDIR="${D}" \
 		install || die "Install failed"
-	exeinto "${INSTALL_DIR}"
+
 	# Install Desktop Icons
 	domenu "${FILESDIR}"/${PN}-{cnc,editor,ra}.desktop || die
 	# Register game-version for Desktop Icons
