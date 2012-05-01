@@ -61,9 +61,9 @@ src_install() {
 		-e "/Name/s/{VERSION}/${VERSION}/" \
 		-i "${D}/${DESK_APPS}"/${PN}-{cnc,editor,ra}.desktop || die
 	if use cg ; then
-		# Install Desktop Icons
+		# Install Cg Desktop Icons
 		domenu "${FILESDIR}"/${PN}-{cnc,ra}-cg.desktop || die
-		# Register game-version for Desktop Icons
+		# Register game-version for Cg Desktop Icons
 		sed \
 			-e "/Name/s/{VERSION}/${VERSION}/" \
 			-i "${D}/${DESK_APPS}"/${PN}-{cnc,ra}-cg.desktop || die
@@ -75,9 +75,10 @@ src_install() {
 	insinto ${DESK_DIR}
 	doins ${FILESDIR}/${PN}.directory || die
 	# Desktop menu
-	insinto "$XDG_CONFIG_DIRS/menus/applications-merged"
+	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
 	doins ${FILESDIR}/games-${PN}.menu || die
-	dodoc ${FILESDIR}/README.gentoo HACKING CHANGELOG COPYING || die
+	dodoc ${FILESDIR}/README.gentoo AUTHORS CHANGELOG COPYING HACKING || die
+	rm AUTHORS CHANGELOG COPYING HACKING INSTALL README || die
 }
 
 pkg_postinst() {
