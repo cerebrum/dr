@@ -4,18 +4,15 @@
 
 EAPI="2"
 
-inherit eutils mono git-2
+inherit eutils mono
 
 #VERSION="release-${PV}"
 VERSION="playtest-${PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://open-ra.org/"
-
-EGIT_REPO_URI="git://github.com/OpenRA/OpenRA.git"
-#EGIT_BRANCH="master"
-EGIT_BRANCH="next"
-EGIT_COMMIT="${VERSION}"
+SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}
+	-> ${PN}-${VERSION}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -39,6 +36,11 @@ INSTALL_DIR_BIN="${PREFIX}/bin"
 ICON_DIR="${DATA_ROOT_DIR}/icons"
 DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
 DESK_APPS="${DATA_ROOT_DIR}/applications"
+
+src_unpack() {
+	unpack ${A}
+	mv OpenRA-OpenRA-* "${S}"
+}
 
 src_install() {
 	# Register game-version
