@@ -4,15 +4,15 @@
 
 EAPI="2"
 
-inherit eutils mono
+inherit eutils mono vcs-snapshot
 
 #VERSION="release-${PV}"
 VERSION="playtest-${PV}"
 
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://open-ra.org/"
-SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION}
-	-> ${PN}-${VERSION}.tar.gz"
+SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION} -> ${P}.tar.gz"
+#	-> ${PN}-${VERSION}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -36,16 +36,15 @@ ICON_DIR="${DATA_ROOT_DIR}/icons"
 DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
 DESK_APPS="${DATA_ROOT_DIR}/applications"
 
-src_unpack() {
-	unpack ${A}
-	mv OpenRA-OpenRA-* "${S}"
-}
-
-src_install() {
+src_prepare() {
 	# Register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
 		-i mods/{ra,cnc}/mod.yaml || die
+}
+
+src_install() 
+{
 	emake \
 		prefix="${PREFIX}" \
 		datarootdir="${DATA_ROOT_DIR}" \
