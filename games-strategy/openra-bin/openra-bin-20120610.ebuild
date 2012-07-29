@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit eutils mono games
+inherit eutils mono gnome2-utils games
 
 MY_PN=${PN%-bin}
 
@@ -85,12 +85,21 @@ src_install() {
 	prepgamesdirs
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	games_pkg_postinst
+	gnome2_icon_cache_update
 
 	elog
 	elog "If you have problems starting the game or want to know more"
 	elog "about it read README.gentoo file in your doc folder."
 	elog
-	update-desktop-database
 }
+
+pkg_postrm() {
+	gnome2_icon_cache_update
+}
+
