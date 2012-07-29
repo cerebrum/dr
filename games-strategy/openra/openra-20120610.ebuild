@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit eutils mono vcs-snapshot
+inherit eutils mono vcs-snapshot games
 
 #VERSION="release-${PV}"
 VERSION="playtest-${PV}"
@@ -12,7 +12,6 @@ VERSION="playtest-${PV}"
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://open-ra.org/"
 SRC_URI="http://www.github.com/OpenRA/OpenRA/tarball/${VERSION} -> ${P}.tar.gz"
-#	-> ${PN}-${VERSION}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -28,16 +27,14 @@ DEPEND="dev-lang/mono[-minimal]
 	cg? ( >=media-gfx/nvidia-cg-toolkit-2.1.0017 )"
 RDEPEND="${DEPEND}"
 
-PREFIX="/usr"
-DATA_ROOT_DIR="${PREFIX}/share"
-INSTALL_DIR="${DATA_ROOT_DIR}/${PN}"
-INSTALL_DIR_BIN="${PREFIX}/bin"
-ICON_DIR="${DATA_ROOT_DIR}/icons"
-DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
-DESK_APPS="${DATA_ROOT_DIR}/applications"
+DESK_APPS="/usr/share/applications"
+
+src_unpack() {
+	vcs-snapshot_src_unpack
+}
 
 src_prepare() {
-	# Register game-version
+	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
 		-i mods/{ra,cnc}/mod.yaml || die
@@ -46,41 +43,49 @@ src_prepare() {
 src_install() 
 {
 	emake \
-		prefix="${PREFIX}" \
-		datarootdir="${DATA_ROOT_DIR}" \
-		datadir="${DATA_ROOT_DIR}" \
-		bindir="${INSTALL_DIR_BIN}" \
+		datadir="${GAMES_DATADIR}" \
+		bindir="${GAMES_BINDIR}" \
+		libdir="$(games_get_libdir)/${PN}" \
 		DESTDIR="${D}" \
 		install || die "Install failed"
 
-	# Install Desktop Icons
+	# desktop entries
 	domenu "${FILESDIR}"/${PN}-{cnc,editor,ra}.desktop || die
-	# Register game-version for Desktop Icons
+	# register game-version for desktop entries
 	sed \
 		-e "/Name/s/{VERSION}/${VERSION}/" \
 		-i "${D}/${DESK_APPS}"/${PN}-{cnc,editor,ra}.desktop || die
 	if use cg ; then
-		# Install Cg Desktop Icons
+		# cg desktop entries
 		domenu "${FILESDIR}"/${PN}-{cnc,ra}-cg.desktop || die
-		# Register game-version for Cg Desktop Icons
+		# register game-version for cg desktop entries
 		sed \
 			-e "/Name/s/{VERSION}/${VERSION}/" \
 			-i "${D}/${DESK_APPS}"/${PN}-{cnc,ra}-cg.desktop || die
 	fi
-	# Icon images
-	insinto ${ICON_DIR}
+
+	# icons
+	insinto /usr/share/icons/
 	doins -r packaging/linux/hicolor || die
-	# Desktop directory
-	insinto ${DESK_DIR}
+
+	# desktop directory
+	insinto /usr/share/desktop-directories
 	doins ${FILESDIR}/${PN}.directory || die
-	# Desktop menu
+
+	# desktop menu
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
 	doins ${FILESDIR}/games-${PN}.menu || die
+
 	dodoc ${FILESDIR}/README.gentoo AUTHORS CHANGELOG COPYING HACKING || die
 	rm AUTHORS CHANGELOG COPYING HACKING INSTALL README || die
+
+	# file permissions
+	prepgamesdirs
 }
 
 pkg_postinst() {
+	games_pkg_postinst
+
 	elog
 	elog "If you have problems starting the game or want to know more"
 	elog "about it read README.gentoo file in your doc folder."

@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit eutils mono
+inherit eutils mono games
 
 MY_PN=${PN%-bin}
 
@@ -16,7 +16,7 @@ LVERSION="playtest.${PV}"
 DESCRIPTION="A Libre/Free RTS engine supporting early Westwood games like Command & Conquer and Red Alert"
 HOMEPAGE="http://open-ra.org/"
 SRC_URI="http://openra.res0l.net/assets/downloads/linux/arch/${MY_PN}-${LVERSION}-1-any.pkg.tar.xz
-			 -> ${PN}-${VERSION}.tar.xz"
+			 -> ${P}.tar.xz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -30,56 +30,64 @@ RDEPEND="dev-lang/mono[-minimal]
 	virtual/opengl
 	cg? ( >=media-gfx/nvidia-cg-toolkit-2.1.0017 )"
 
-PREFIX="usr"
-DATA_ROOT_DIR="${PREFIX}/share"
-INSTALL_DIR="${DATA_ROOT_DIR}/${PN}"
-INSTALL_DIR_BIN="${PREFIX}/bin"
-ICON_DIR="${DATA_ROOT_DIR}/icons"
-DESK_DIR="${DATA_ROOT_DIR}/desktop-directories"
-DESK_APPS="${DATA_ROOT_DIR}/applications"
+ICON_DIR="usr/share/icons"
+DESK_APPS="${GAMES_DATADIR_BASE}/applications"
 
 src_prepare() {
-	# Remove old and unnecessary desktop file
-	rm -v ${DATA_ROOT_DIR}/applications/${MY_PN}.desktop
-	# Move program files to correct binary location
-	mv -v ${DATA_ROOT_DIR}/${MY_PN} ${INSTALL_DIR}
+	# remove old and unnecessary desktop file
+	rm -v ${WORKDIR}/${GAMES_DATADIR_BASE}/applications/${MY_PN}.desktop || die
+	# move program files to correct binary location
+	mkdir -v ${WORKDIR}/${GAMES_PREFIX_OPT} || die
+	mv -v ${WORKDIR}/${GAMES_DATADIR_BASE}/${MY_PN} \
+		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN} || die
 	for size in {16x16,32x32,48x48,64x64,128x128}; do mv -v \
 		${ICON_DIR}/hicolor/${size}/apps/${MY_PN}.png \
-		${ICON_DIR}/hicolor/${size}/apps/${PN}.png; done
+		${ICON_DIR}/hicolor/${size}/apps/${PN}.png || die; done
 }
 
 src_install() {
-	# Install Desktop Icons
+	# desktop entries
 	domenu "${FILESDIR}"/${PN}-{cnc,editor,ra}.desktop || die
-	# Register game-version for Desktop Icons
+	# register game-version for desktop entries
 	sed \
 		-e "/Name/s/{VERSION}/${VERSION}/" \
 		-i "${D}/${DESK_APPS}"/${PN}-{cnc,editor,ra}.desktop || die
 	if use cg ; then
-		# Install Cg Desktop Icons
+		# cg desktop entries
 		domenu "${FILESDIR}"/${PN}-{cnc,ra}-cg.desktop || die
-		# Register game-version for Cg Desktop Icons
+		# register game-version for cg desktop entries
 		sed \
 			-e "/Name/s/{VERSION}/${VERSION}/" \
 			-i "${D}/${DESK_APPS}"/${PN}-{cnc,ra}-cg.desktop || die
 	fi
-	# Icon images
-	insinto ${ICON_DIR}
+
+	# icons
+	insinto /${ICON_DIR}
 	doins -r ${ICON_DIR}/hicolor || die
-	# Desktop directory
-	insinto /${DESK_DIR}
+
+	# desktop directory
+	insinto ${GAMES_DATADIR_BASE}/desktop-directories
 	doins ${FILESDIR}/${PN}.directory || die
-	# Desktop menu
+
+	# desktop menu
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
 	doins ${FILESDIR}/games-${PN}.menu || die
-	dodir /${INSTALL_DIR}
-	cp -R "${WORKDIR}/${INSTALL_DIR}/" "${D}/${DATA_ROOT_DIR}/" || die "Install failed!"
+
+	dodir ${GAMES_PREFIX_OPT}/${PN} || die
+	cp -R "${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}" "${D}/${GAMES_PREFIX_OPT}/" \
+		|| die "Install failed!"
+
 	dodoc ${FILESDIR}/README.gentoo \
-		${INSTALL_DIR}/{CHANGELOG,COPYING,HACKING} || die
-	rm ${INSTALL_DIR}/{CHANGELOG,COPYING,HACKING,INSTALL} || die
+		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}/{CHANGELOG,COPYING,HACKING} || die
+	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{CHANGELOG,COPYING,HACKING,INSTALL} || die
+
+	# file permissions
+	prepgamesdirs
 }
 
 pkg_postinst() {
+	games_pkg_postinst
+
 	elog
 	elog "If you have problems starting the game or want to know more"
 	elog "about it read README.gentoo file in your doc folder."
