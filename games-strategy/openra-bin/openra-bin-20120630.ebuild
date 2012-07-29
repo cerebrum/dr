@@ -47,18 +47,23 @@ src_prepare() {
 
 src_install() {
 	# desktop entries
-	domenu "${FILESDIR}"/${PN}-{cnc,editor,ra}.desktop || die
-	# register game-version for desktop entries
-	sed \
-		-e "/Name/s/{VERSION}/${VERSION}/" \
-		-i "${D}/${DESK_APPS}"/${PN}-{cnc,editor,ra}.desktop || die
+	make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Gl" \
+		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
+		"GenericName=OpenRA - Command & Conquer (Gl)" || die
+	make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Gl" \
+		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
+		"GenericName=OpenRA - Red Alert (Gl)" || die
+	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN} \
+		"StrategyGame" "GenericName=OpenRA - Editor" || die
+
 	if use cg ; then
 		# cg desktop entries
-		domenu "${FILESDIR}"/${PN}-{cnc,ra}-cg.desktop || die
-		# register game-version for cg desktop entries
-		sed \
-			-e "/Name/s/{VERSION}/${VERSION}/" \
-			-i "${D}/${DESK_APPS}"/${PN}-{cnc,ra}-cg.desktop || die
+		make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Cg" \
+			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
+			"GenericName=OpenRA - Command & Conquer (Cg)" || die
+		make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Cg" \
+			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
+			"GenericName=OpenRA - Red Alert (Cg)" || die
 	fi
 
 	# icons

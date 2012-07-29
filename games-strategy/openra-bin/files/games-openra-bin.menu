@@ -5,15 +5,19 @@
   <Menu>
     <Name>Games</Name>
   <Menu>
+    <Name>StrategyGame</Name>
+  <Menu>
     <Name>OpenRA-Bin</Name>
     <Directory>openra-bin.directory</Directory>
     <Include>
-      <Filename>openra-bin-cnc-cg.desktop</Filename>
-      <Filename>openra-bin-cnc.desktop</Filename>
-      <Filename>openra-bin-editor.desktop</Filename>
-      <Filename>openra-bin-ra-cg.desktop</Filename>
-      <Filename>openra-bin-ra.desktop</Filename>
+      <Filename>openra-bin_Game.Mods=cnc_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mods=cnc_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
+      <Filename>openra-bin-editor-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mods=ra_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mods=ra_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
     </Include>
   </Menu>
   </Menu>
+  </Menu>
 </Menu>
+
