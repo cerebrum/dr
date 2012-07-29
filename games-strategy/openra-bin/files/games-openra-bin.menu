@@ -5,7 +5,7 @@
   <Menu>
     <Name>Games</Name>
   <Menu>
-    <Name>StrategyGame</Name>
+    <Name>TacticStrategy</Name>
   <Menu>
     <Name>OpenRA-Bin</Name>
     <Directory>openra-bin.directory</Directory>

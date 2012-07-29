@@ -5,7 +5,7 @@
   <Menu>
     <Name>Games</Name>
   <Menu>
-    <Name>StrategyGame</Name>
+    <Name>TacticStrategy</Name>
   <Menu>
     <Name>OpenRA</Name>
     <Directory>openra.directory</Directory>
