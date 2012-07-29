@@ -1,8 +1,9 @@
 OpenRA is a Libre/Free Real Time Strategy game engine supporting early
-Westwood games like Command & Conquer and Command & Conquer: Red Alert.
+Westwood games like Command & Conquer, Red Alert and Dune 2000.
 
 Distributed mods include a reimagining and updating of both the Red
-Alert and Command & Conquer multiplayer games.
+Alert and Command & Conquer multiplayer games. A new Dune 2000 mod
+is under development at the moment.
 
 You may run the game from desktop games menu or just manually
 run the game with `mono OpenRA.Game.exe Game.Mods=ra` for Red Alert
@@ -39,8 +40,9 @@ But the better choice is to download a full pack from original game CD
 (or iso). However, full CD pack usage result in slower game start from
 OpenRA Lobby. It happens due to a lot of unnecessary things like video
 clips were pre-packaged in it. If you want optimal game start and all
-music themes (made by Frank Klepacki) from classic CD you should
-download them from OpenRA Forum:
+music themes (made by Frank Klepacki) from classic RA CD and expansion
+packs like Counterstrike and The Aftermath you should download them
+from OpenRA Forum:
 http://www.sleipnirstuff.com/forum/viewtopic.php?f=83&t=15063
 
 The minimal required files for the Red Alert mod are:
@@ -87,6 +89,11 @@ The default setting is 60 frames per second. You can change it's value by
 adding "MaxFramerate: 70", for example, string in that section. Be careful
 with special tab symbols at the beginning of the strings. Don't forget to
 backup your settings file.
+
+You can also change game speed to watch replayes faster. Just add "Timestep: 10"
+in the "Game:" section of your ~/.openra/settings.yaml file. Don't forget to
+change it back to default value (40) before actual game in multiplayer or 
+you'll get a desync otherwise.
 
 Please note: OpenRA has 2 types of released versions:
 1. Release Versions or just Versions.
