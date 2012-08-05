@@ -78,6 +78,9 @@ src_install() {
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
 	doins ${FILESDIR}/games-${PN}.menu || die
 
+	# wrapper script
+	dogamesbin "${FILESDIR}/${PN}"
+
 	dodir ${GAMES_PREFIX_OPT}/${PN} || die
 	cp -R "${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}" "${D}/${GAMES_PREFIX_OPT}/" \
 		|| die "Install failed!"

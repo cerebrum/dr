@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /usr/share/games/openra-bin
+exec mono /usr/share/games/openra-bin/OpenRA.Game.exe "$@"
