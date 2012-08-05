@@ -53,6 +53,9 @@ src_install() {
 	make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Gl" \
 		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
 		"GenericName=OpenRA - Red Alert (Gl)" || die
+	make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Gl" \
+		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
+		"GenericName=OpenRA - Dune 2000 (Gl)" || die
 	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN} \
 		"StrategyGame" "GenericName=OpenRA - Editor" || die
 
@@ -64,6 +67,9 @@ src_install() {
 		make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Cg" \
 			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
 			"GenericName=OpenRA - Red Alert (Cg)" || die
+		make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Cg" \
+			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
+			"GenericName=OpenRA - Dune 2000 (Cg)" || die
 	fi
 
 	# icons
