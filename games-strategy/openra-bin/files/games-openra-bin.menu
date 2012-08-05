@@ -10,6 +10,8 @@
     <Name>OpenRA-Bin</Name>
     <Directory>openra-bin.directory</Directory>
     <Include>
+      <Filename>openra-bin_Game.Mods=d2k_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mods=d2k_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
       <Filename>openra-bin_Game.Mods=cnc_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
       <Filename>openra-bin_Game.Mods=cnc_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
       <Filename>openra-bin-editor-openra-bin.desktop</Filename>
