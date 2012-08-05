@@ -79,7 +79,7 @@ src_install() {
 	doins ${FILESDIR}/games-${PN}.menu || die
 
 	# wrapper script
-	dogamesbin "${FILESDIR}/${PN}"
+	dogamesbin "${FILESDIR}/${PN}" || die
 
 	dodir ${GAMES_PREFIX_OPT}/${PN} || die
 	cp -R "${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}" "${D}/${GAMES_PREFIX_OPT}/" \
