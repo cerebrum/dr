@@ -34,6 +34,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	MAKEOPTS="${MAKEOPTS} -j1" # temporary compilation bug workaround
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
