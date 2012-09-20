@@ -1,0 +1,44 @@
+diff -ur OpenRA-OpenRA-6d3a932/OpenRA.Game/Game.cs OpenRA-OpenRA-6d3a932-new/OpenRA.Game/Game.cs
+--- OpenRA-OpenRA-6d3a932/OpenRA.Game/Game.cs	2012-08-25 07:32:29.000000000 +0400
++++ OpenRA-OpenRA-6d3a932-new/OpenRA.Game/Game.cs	2012-09-20 19:03:06.118956151 +0400
+@@ -327,9 +327,11 @@
+ 
+ 		internal static void Run()
+ 		{
++			var idealFrameTime = 1.0 / Settings.Graphics.MaxFramerate;
++			ushort i=0;
++			
+ 			while (!quit)
+ 			{
+-				var idealFrameTime = 1.0 / Settings.Graphics.MaxFramerate;
+ 				var sw = new Stopwatch();
+ 
+ 				Tick( orderManager, viewport );
+@@ -340,6 +342,16 @@
+ 					if (waitTime > 0)
+ 						System.Threading.Thread.Sleep( TimeSpan.FromSeconds(waitTime) );
+ 				}
++				
++				if (Settings.Graphics.DebugFramerate)
++				{
++					i++;
++					if (i == Settings.Graphics.MaxFramerate / 2)
++					{
++						Debug("Frame Rate: {0}", (float) 1.0/sw.ElapsedTime());
++						i = 0;
++					}
++				}
+ 			}
+ 
+ 			OnQuit();
+diff -ur OpenRA-OpenRA-6d3a932/OpenRA.Game/GameRules/Settings.cs OpenRA-OpenRA-6d3a932-new/OpenRA.Game/GameRules/Settings.cs
+--- OpenRA-OpenRA-6d3a932/OpenRA.Game/GameRules/Settings.cs	2012-08-25 07:32:29.000000000 +0400
++++ OpenRA-OpenRA-6d3a932-new/OpenRA.Game/GameRules/Settings.cs	2012-09-20 18:56:30.890957574 +0400
+@@ -71,6 +71,7 @@
+ 		public bool PixelDouble = false;
+ 		public bool CapFramerate = false;
+ 		public int MaxFramerate = 60;
++		public bool DebugFramerate = false;
+ 
+ 		public int BatchSize = 8192;
+ 		public int NumTempBuffers = 8;

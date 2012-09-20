@@ -34,6 +34,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/capFramerate20120630.patch"
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
