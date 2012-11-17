@@ -1,0 +1,15 @@
+--- a/webcamstudio.c	2012-10-18 13:22:07.461628498 +0300
++++ b/webcamstudio.c	2012-10-18 14:11:39.129562024 +0300
+@@ -2025,7 +2025,12 @@
+     b->length            = buffer_size;
+     b->field             = V4L2_FIELD_NONE;
+     b->flags             = 0;
++    b->reserved          = 0;
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,6,0)
+     b->input             = 0;
++#else
++    b->reserved2         = 0;
++#endif
+     b->m.offset          = i * buffer_size;
+     b->memory            = V4L2_MEMORY_MMAP;
+     b->sequence          = 0;
