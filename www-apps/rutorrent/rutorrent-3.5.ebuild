@@ -53,3 +53,10 @@ src_install() {
 
 	webapp_src_install
 }
+
+pkg_postinst() {
+	elog
+	elog "Add \"-D XSENDFILE\" to APACHE2_OPTS in /etc/conf.d/apache2"
+	elog "and restart apache2 daemon."
+	elog
+}
