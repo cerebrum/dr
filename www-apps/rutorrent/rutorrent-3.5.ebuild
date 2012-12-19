@@ -20,6 +20,7 @@ need_httpd_cgi
 need_php_httpd
 
 DEPEND="|| ( dev-lang/php[xml,gd] dev-lang/php[xml,gd-external] )
+	www-apache/mod_xsendfile
 	geoip? ( >=dev-php/pecl-geoip-1.0.8-r1 )"
 
 S="${WORKDIR}"
