@@ -21,7 +21,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 #KEYWORDS="~amd64 ~x86"
-IUSE="cg tools"
+IUSE="cg"
 
 RDEPEND="dev-lang/mono[-minimal]
 	media-libs/freetype:2[X]
