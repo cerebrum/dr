@@ -39,12 +39,12 @@ src_unpack() {
 	vcs-snapshot_src_unpack
 }
 
-#src_prepare() {
-	# register game-version
-	#sed \
-	#	-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
-	#	-i mods/{ra,cnc,d2k,ts}/mod.yaml
-#}
+src_prepare() {
+	 register game-version
+	sed \
+		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
+		-i mods/{ra,cnc,d2k}/mod.yaml
+}
 
 src_compile() {
 	emake $(usex tools "all" "")
