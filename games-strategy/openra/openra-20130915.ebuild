@@ -70,7 +70,7 @@ src_install()
 	make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Gl" \
 		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
 		"GenericName=OpenRA - Dune 2000 (Gl)"
-	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN} \
+	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN}-editor \
 		"StrategyGame" "GenericName=OpenRA - Editor"
 
 	if use cg ; then

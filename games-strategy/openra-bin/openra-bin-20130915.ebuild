@@ -43,7 +43,9 @@ src_prepare() {
 		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN} || die
 	for size in {16x16,32x32,48x48,64x64,128x128}; do mv -v \
 		${ICON_DIR}/hicolor/${size}/apps/${MY_PN}.png \
-		${ICON_DIR}/hicolor/${size}/apps/${PN}.png || die; done
+		${ICON_DIR}/hicolor/${size}/apps/${PN}.png || die; \
+		mv -v ${ICON_DIR}/hicolor/${size}/apps/${MY_PN}-editor.png \
+		${ICON_DIR}/hicolor/${size}/apps/${PN}-editor.png; done
 }
 
 src_install() {
@@ -57,7 +59,7 @@ src_install() {
 	make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Gl" \
 		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
 		"GenericName=OpenRA - Dune 2000 (Gl)" || die
-	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN} \
+	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN}-editor \
 		"StrategyGame" "GenericName=OpenRA - Editor" || die
 
 	if use cg ; then
