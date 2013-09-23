@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <herd>no-herd</herd>
-<maintainer>
-	<email>energumenoster@gmail.com</email>
-</maintainer>
-  <use>
-  <flag name='cg'>Enable support of old renderer through NVidia Cg</flag>
-  </use>
+	<herd>proxy-maintainers</herd>
+	<maintainer>
+		<email>diamond@hi-net.ru</email>
+		<description>Proxy maintainer. CC him on bugs</description>
+	</maintainer>
+	<upstream>
+		<changelog>http://openra.res0l.net/news/</changelog>
+		<doc lang="en">https://github.com/OpenRA/OpenRA/wiki</doc>
+		<bugs-to>https://github.com/OpenRA/OpenRA/issues</bugs-to>
+	</upstream>
+	<use>
+		<flag name='cg'>Enable support of old renderer through NVidia Cg</flag>
+	</use>
 </pkgmetadata>
