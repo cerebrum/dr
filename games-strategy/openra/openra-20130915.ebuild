@@ -99,7 +99,7 @@ src_install()
 	doins ${FILESDIR}/games-${PN}.menu
 
 	dodoc ${FILESDIR}/README.gentoo README.md HACKING CHANGELOG AUTHORS COPYING
-	#rm README.md HACKING CHANGELOG AUTHORS COPYING INSTALL
+	rm AUTHORS
 
 	# file permissions
 	prepgamesdirs
