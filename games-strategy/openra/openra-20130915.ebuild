@@ -40,7 +40,8 @@ src_unpack() {
 }
 
 src_prepare() {
-	 register game-version
+	epatch "${FILESDIR}/make.patch"
+	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
 		-i mods/{ra,cnc,d2k}/mod.yaml
