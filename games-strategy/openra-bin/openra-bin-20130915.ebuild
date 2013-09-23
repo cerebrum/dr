@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=3
 
 inherit eutils mono-env gnome2-utils games
 
@@ -36,64 +36,70 @@ DESK_APPS="${GAMES_DATADIR_BASE}/applications"
 
 src_prepare() {
 	# remove old and unnecessary desktop file
-	rm -v ${WORKDIR}/${GAMES_DATADIR_BASE}/applications/${MY_PN}.desktop
+	rm -v ${WORKDIR}/${GAMES_DATADIR_BASE}/applications/${MY_PN}.desktop || die
 	# move program files to correct binary location
-	mkdir -v ${WORKDIR}/${GAMES_PREFIX_OPT}
+	mkdir -v ${WORKDIR}/${GAMES_PREFIX_OPT} || die
 	mv -v ${WORKDIR}/${GAMES_DATADIR_BASE}/${MY_PN} \
-		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}
+		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN} || die
 	for size in {16x16,32x32,48x48,64x64,128x128}; do mv -v \
 		${ICON_DIR}/hicolor/${size}/apps/${MY_PN}.png \
-		${ICON_DIR}/hicolor/${size}/apps/${PN}.png; done
+		${ICON_DIR}/hicolor/${size}/apps/${PN}.png || die; done
 }
 
 src_install() {
 	# desktop entries
 	make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Gl" \
 		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
-		"GenericName=OpenRA - Command & Conquer (Gl)"
+		"GenericName=OpenRA - Command & Conquer (Gl)" || die
 	make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Gl" \
 		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
-		"GenericName=OpenRA - Red Alert (Gl)"
+		"GenericName=OpenRA - Red Alert (Gl)" || die
 	make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Gl" \
 		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
-		"GenericName=OpenRA - Dune 2000 (Gl)"
+		"GenericName=OpenRA - Dune 2000 (Gl)" || die
 	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN} \
-		"StrategyGame" "GenericName=OpenRA - Editor"
+		"StrategyGame" "GenericName=OpenRA - Editor" || die
 
 	if use cg ; then
 		# cg desktop entries
 		make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Cg" \
 			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
-			"GenericName=OpenRA - Command & Conquer (Cg)"
+			"GenericName=OpenRA - Command & Conquer (Cg)" || die
 		make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Cg" \
 			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
-			"GenericName=OpenRA - Red Alert (Cg)"
+			"GenericName=OpenRA - Red Alert (Cg)" || die
 		make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Cg" \
 			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
-			"GenericName=OpenRA - Dune 2000 (Cg)"
+			"GenericName=OpenRA - Dune 2000 (Cg)" || die
 	fi
 
 	# icons
 	insinto /${ICON_DIR}
-	doins -r ${ICON_DIR}/hicolor
+	doins -r ${ICON_DIR}/hicolor || die
 
 	# desktop directory
 	insinto ${GAMES_DATADIR_BASE}/desktop-directories
-	doins ${FILESDIR}/${PN}.directory
+	doins ${FILESDIR}/${PN}.directory || die
 
 	# desktop menu
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
-	doins ${FILESDIR}/games-${PN}.menu
+	doins ${FILESDIR}/games-${PN}.menu || die
 
 	# wrapper script
-	dogamesbin ${FILESDIR}/${PN}
+	dogamesbin ${FILESDIR}/${PN} || die
 
-	dodir ${GAMES_PREFIX_OPT}/${PN}
-	cp -R "${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}" "${D}/${GAMES_PREFIX_OPT}/"
+	dodir ${GAMES_PREFIX_OPT}/${PN} || die
+	cp -R "${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}" "${D}/${GAMES_PREFIX_OPT}/" \
+		|| die "Install failed!"
 
 	dodoc ${FILESDIR}/README.gentoo \
-		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}/{README.md,HACKING,CHANGELOG,AUTHORS,COPYING}
-	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{README.md,HACKING,CHANGELOG,AUTHORS,COPYING,INSTALL}
+		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}/{HACKING,CHANGELOG,AUTHORS,COPYING} || die
+	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{HACKING,CHANGELOG,AUTHORS,COPYING,INSTALL} || die
+	dohtml \
+	${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
+		|| die
+	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
+		|| die
 
 	# file permissions
 	prepgamesdirs
