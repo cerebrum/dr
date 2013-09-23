@@ -19,14 +19,15 @@ KEYWORDS="amd64 x86"
 #KEYWORDS="~amd64 ~x86"
 IUSE="cg tools"
 
-DEPEND="dev-lang/mono[-minimal]
+RDEPEND="dev-lang/mono[-minimal]
 	media-libs/freetype:2[X]
 	media-libs/libsdl[X,video]
 	media-libs/openal
 	virtual/jpeg
 	virtual/opengl
 	cg? ( >=media-gfx/nvidia-cg-toolkit-2.1.0017 )"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	app-text/discount[minimal]"
 
 DESK_APPS="${GAMES_DATADIR_BASE}/applications"
 
@@ -58,7 +59,7 @@ src_install()
 		bindir="${GAMES_BINDIR}" \
 		libdir="$(games_get_libdir)/${PN}" \
 		DESTDIR="${D}" \
-		$(usex tools "install-all" "install")
+		$(usex tools "install-all" "install") #docs
 
 	# desktop entries
 	make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Gl" \
@@ -98,8 +99,12 @@ src_install()
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
 	doins ${FILESDIR}/games-${PN}.menu
 
-	dodoc ${FILESDIR}/README.gentoo README.md HACKING CHANGELOG AUTHORS COPYING
+	# generate documentation
+	dodoc ${FILESDIR}/README.gentoo HACKING CHANGELOG AUTHORS COPYING
 	rm -v "${D}"/${GAMES_DATADIR}/${PN}/AUTHORS
+	#DOCUMENTATION was removed due to bug with make docs
+	for file in {README,CONTRIBUTING}; do \
+		markdown ${file}.md > ${file}.html; dohtml ${file}.html; done
 	# file permissions
 	prepgamesdirs
 }
