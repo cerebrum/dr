@@ -28,7 +28,7 @@ DEPEND="dev-lang/mono[-minimal]
 	cg? ( >=media-gfx/nvidia-cg-toolkit-2.1.0017 )"
 RDEPEND="${DEPEND}"
 
-DESK_APPS="/usr/share/applications"
+DESK_APPS="${GAMES_DATADIR_BASE}/applications"
 
 pkg_setup() {
 	mono-env_pkg_setup
@@ -90,14 +90,14 @@ src_install()
 	doins -r packaging/linux/hicolor
 
 	# desktop directory
-	insinto /usr/share/desktop-directories
-	doins "${FILESDIR}/${PN}.directory"
+	insinto ${GAMES_DATADIR_BASE}/desktop-directories
+	doins ${FILESDIR}/${PN}.directory
 
 	# desktop menu
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
 	doins ${FILESDIR}/games-${PN}.menu
 
-	dodoc "${FILESDIR}"/README.gentoo README.md HACKING CHANGELOG AUTHORS COPYING
+	dodoc ${FILESDIR}/README.gentoo README.md HACKING CHANGELOG AUTHORS COPYING
 	#rm README.md HACKING CHANGELOG AUTHORS COPYING INSTALL
 
 	# file permissions
@@ -105,7 +105,6 @@ src_install()
 }
 
 pkg_preinst() {
-	games_pkg_preinst
 	gnome2_icon_savelist
 }
 
