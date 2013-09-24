@@ -16,9 +16,10 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 #KEYWORDS="~amd64 ~x86"
-IUSE="cg tools"
+IUSE="cg doc tools"
 
-RDEPEND="dev-lang/mono[-minimal]
+RDEPEND="dev-dotnet/libgdiplus
+	dev-lang/mono
 	media-libs/freetype:2[X]
 	media-libs/libsdl[X,opengl,video]
 	media-libs/openal
@@ -26,7 +27,7 @@ RDEPEND="dev-lang/mono[-minimal]
 	virtual/opengl
 	cg? ( >=media-gfx/nvidia-cg-toolkit-2.1.0017 )"
 DEPEND="${RDEPEND}
-	app-text/discount[minimal]"
+	doc? ( app-text/discount )"
 
 pkg_setup() {
 	mono-env_pkg_setup

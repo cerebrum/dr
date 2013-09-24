@@ -13,6 +13,7 @@
 	</upstream>
 	<use>
 		<flag name='cg'>Enable support of old renderer through NVidia Cg</flag>
+		<flag name='doc'>Generate additional documentation</flag>
 		<flag name="tools">Install some development tools
 			such as editor.</flag>
 	</use>
