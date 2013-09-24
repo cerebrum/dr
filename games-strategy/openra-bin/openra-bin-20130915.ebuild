@@ -78,11 +78,11 @@ src_install() {
 	doins -r ${ICON_DIR}/hicolor || die
 
 	# desktop directory
-	insinto ${GAMES_DATADIR_BASE}/desktop-directories
+	insinto /usr/share/desktop-directories
 	doins "${FILESDIR}"/${PN}.directory || die
 
 	# desktop menu
-	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
+	insinto /etc/xdg/menus/applications-merged
 	doins "${FILESDIR}"/games-${PN}.menu || die
 
 	# wrapper script

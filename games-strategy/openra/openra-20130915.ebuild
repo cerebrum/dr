@@ -80,14 +80,14 @@ src_install()
 	doins -r packaging/linux/hicolor
 
 	# desktop directory
-	insinto ${GAMES_DATADIR_BASE}/desktop-directories
+	insinto /usr/share/desktop-directories
 	doins "${FILESDIR}"/${PN}.directory
 
 	# desktop menu
-	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
+	insinto /etc/xdg/menus/applications-merged
 	doins "${FILESDIR}"/games-${PN}.menu
 
-	# generate documentation
+	# docs
 	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS
 	rm -v "${D}"/${GAMES_DATADIR}/${PN}/AUTHORS || die
 	#DOCUMENTATION was removed due to bug with make docs
