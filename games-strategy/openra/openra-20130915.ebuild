@@ -98,7 +98,7 @@ src_install()
 	doins "${FILESDIR}"/games-${PN}.menu
 
 	# generate documentation
-	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS COPYING
+	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS
 	rm -v "${D}"/${GAMES_DATADIR}/${PN}/AUTHORS
 	#DOCUMENTATION was removed due to bug with make docs
 	for file in {README,CONTRIBUTING}; do \
