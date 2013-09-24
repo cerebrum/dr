@@ -29,8 +29,6 @@ RDEPEND="dev-lang/mono[-minimal]
 DEPEND="${RDEPEND}
 	app-text/discount[minimal]"
 
-DESK_APPS="${GAMES_DATADIR_BASE}/applications"
-
 pkg_setup() {
 	mono-env_pkg_setup
 	games_pkg_setup
