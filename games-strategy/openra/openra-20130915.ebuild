@@ -43,7 +43,7 @@ src_prepare() {
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
-		-i mods/{ra,cnc,d2k}/mod.yaml
+		-i mods/{ra,cnc,d2k}/mod.yaml || die
 }
 
 src_compile() {
@@ -99,10 +99,10 @@ src_install()
 
 	# generate documentation
 	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS
-	rm -v "${D}"/${GAMES_DATADIR}/${PN}/AUTHORS
+	rm -v "${D}"/${GAMES_DATADIR}/${PN}/AUTHORS || die
 	#DOCUMENTATION was removed due to bug with make docs
 	for file in {README,CONTRIBUTING}; do \
-		markdown ${file}.md > ${file}.html; dohtml ${file}.html; done
+		markdown ${file}.md > ${file}.html || die; dohtml ${file}.html; done
 	# file permissions
 	prepgamesdirs
 }
