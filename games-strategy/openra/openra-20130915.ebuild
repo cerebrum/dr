@@ -27,7 +27,10 @@ RDEPEND="dev-dotnet/libgdiplus
 	virtual/opengl
 	cg? ( >=media-gfx/nvidia-cg-toolkit-2.1.0017 )"
 DEPEND="${RDEPEND}
-	doc? ( app-text/discount )"
+	doc? ( || ( app-text/discount
+		app-text/peg-markdown
+		dev-python/markdown
+		dev-perl/Text-Markdown ) )"
 
 pkg_setup() {
 	mono-env_pkg_setup
@@ -90,12 +93,15 @@ src_install()
 	# docs
 	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS
 	#DOCUMENTATION was removed due to bug with make docs
-	if [[ -n "$(type -P markdown_py)" ]] ; then
+	if [[ -n "$(type -P markdown)" ]] ; then
 		local file; for file in {README,CONTRIBUTING}; do \
-		markdown_py ${file}.md > ${file}.html || die; dohtml ${file}.html; done
-	elif [[ -n "$(type -P markdown)" ]] ; then
-	local file; for file in {README,CONTRIBUTING}; do \
-		markdown ${file}.md > ${file}.html || die; dohtml ${file}.html; done
+		markdown ${file}.md > ${file}.html && dohtml ${file}.html || die; done
+	elif [[ -n "$(type -P markdown_py)" ]] ; then
+		local file; for file in {README,CONTRIBUTING}; do \
+		markdown_py ${file}.md > ${file}.html && dohtml ${file}.html || die; done
+	elif [[ -n "$(type -P Markdown.pl)" ]] ; then
+		local file; for file in {README,CONTRIBUTING}; do \
+		Markdown.pl ${file}.md > ${file}.html && dohtml ${file}.html || die; done
 	else
 		dodoc {README,CONTRIBUTING}.md
 	fi
