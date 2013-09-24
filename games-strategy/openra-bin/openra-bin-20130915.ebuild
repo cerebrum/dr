@@ -36,12 +36,12 @@ DESK_APPS="${GAMES_DATADIR_BASE}/applications"
 
 src_prepare() {
 	# remove old and unnecessary desktop file
-	rm -v ${WORKDIR}/${GAMES_DATADIR_BASE}/applications/${MY_PN}.desktop || die
+	rm -v "${WORKDIR}"/${GAMES_DATADIR_BASE}/applications/${MY_PN}.desktop || die
 	# move program files to correct binary location
-	mkdir -v ${WORKDIR}/${GAMES_PREFIX_OPT} || die
-	mv -v ${WORKDIR}/${GAMES_DATADIR_BASE}/${MY_PN} \
-		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN} || die
-	for size in {16x16,32x32,48x48,64x64,128x128}; do mv -v \
+	mkdir -v "${WORKDIR}"/${GAMES_PREFIX_OPT} || die
+	mv -v "${WORKDIR}"/${GAMES_DATADIR_BASE}/${MY_PN} \
+		"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN} || die
+	local size; for size in {16x16,32x32,48x48,64x64,128x128}; do mv -v \
 		${ICON_DIR}/hicolor/${size}/apps/${MY_PN}.png \
 		${ICON_DIR}/hicolor/${size}/apps/${PN}.png || die; \
 		mv -v ${ICON_DIR}/hicolor/${size}/apps/${MY_PN}-editor.png \
@@ -81,26 +81,26 @@ src_install() {
 
 	# desktop directory
 	insinto ${GAMES_DATADIR_BASE}/desktop-directories
-	doins ${FILESDIR}/${PN}.directory || die
+	doins "${FILESDIR}"/${PN}.directory || die
 
 	# desktop menu
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
-	doins ${FILESDIR}/games-${PN}.menu || die
+	doins "${FILESDIR}"/games-${PN}.menu || die
 
 	# wrapper script
-	dogamesbin ${FILESDIR}/${PN} || die
+	dogamesbin "${FILESDIR}"/${PN} || die
 
 	dodir ${GAMES_PREFIX_OPT}/${PN} || die
 	cp -R "${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}" "${D}/${GAMES_PREFIX_OPT}/" \
 		|| die "Install failed!"
 
-	dodoc ${FILESDIR}/README.gentoo \
-		${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}/{HACKING,CHANGELOG,AUTHORS,COPYING} || die
+	dodoc "${FILESDIR}"/README.gentoo \
+	"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{HACKING,CHANGELOG,AUTHORS,COPYING} || die
 	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{HACKING,CHANGELOG,AUTHORS,COPYING,INSTALL} || die
 	dohtml \
-	${WORKDIR}/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
+	"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
 		|| die
-	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
+	rm -v "${D}"/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
 		|| die
 
 	# file permissions

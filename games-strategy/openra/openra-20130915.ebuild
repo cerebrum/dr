@@ -101,7 +101,7 @@ src_install()
 	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS
 	rm -v "${D}"/${GAMES_DATADIR}/${PN}/AUTHORS || die
 	#DOCUMENTATION was removed due to bug with make docs
-	for file in {README,CONTRIBUTING}; do \
+	local file; for file in {README,CONTRIBUTING}; do \
 		markdown ${file}.md > ${file}.html || die; dohtml ${file}.html; done
 	# file permissions
 	prepgamesdirs
