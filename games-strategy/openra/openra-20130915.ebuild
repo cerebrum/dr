@@ -6,12 +6,11 @@ EAPI=5
 
 inherit eutils mono-env gnome2-utils vcs-snapshot games
 
-VERSION="release-${PV}"
-#VERSION="playtest-${PV}"
-
+MY_PV=release-${PV}
+#MY_PV=playtest-${PV}
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://open-ra.org/"
-SRC_URI="https://github.com/OpenRA/OpenRA/archive/${VERSION}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -42,7 +41,7 @@ src_prepare() {
 	epatch "${FILESDIR}/make.patch"
 	# register game-version
 	sed \
-		-e "/Version/s/{DEV_VERSION}/${VERSION}/" \
+		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
 		-i mods/{ra,cnc,d2k}/mod.yaml || die
 }
 
@@ -61,27 +60,27 @@ src_install()
 
 	# desktop entries
 	make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Gl" \
-		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
+		"OpenRA ver. ${MY_PV} (Gl Renderer)" ${PN} "StrategyGame" \
 		"GenericName=OpenRA - Command & Conquer (Gl)"
 	make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Gl" \
-		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
+		"OpenRA ver. ${MY_PV} (Gl Renderer)" ${PN} "StrategyGame" \
 		"GenericName=OpenRA - Red Alert (Gl)"
 	make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Gl" \
-		"OpenRA ver. ${VERSION} (Gl Renderer)" ${PN} "StrategyGame" \
+		"OpenRA ver. ${MY_PV} (Gl Renderer)" ${PN} "StrategyGame" \
 		"GenericName=OpenRA - Dune 2000 (Gl)"
-	make_desktop_entry "${PN}-editor" "OpenRA ver. ${VERSION} Map Editor" ${PN}-editor \
+	make_desktop_entry "${PN}-editor" "OpenRA ver. ${MY_PV} Map Editor" ${PN}-editor \
 		"StrategyGame" "GenericName=OpenRA - Editor"
 
 	if use cg ; then
 		# cg desktop entries
 		make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Cg" \
-			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
+			"OpenRA ver. ${MY_PV} (Cg Renderer)" ${PN} "StrategyGame" \
 			"GenericName=OpenRA - Command & Conquer (Cg)"
 		make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Cg" \
-			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
+			"OpenRA ver. ${MY_PV} (Cg Renderer)" ${PN} "StrategyGame" \
 			"GenericName=OpenRA - Red Alert (Cg)"
 		make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Cg" \
-			"OpenRA ver. ${VERSION} (Cg Renderer)" ${PN} "StrategyGame" \
+			"OpenRA ver. ${MY_PV} (Cg Renderer)" ${PN} "StrategyGame" \
 			"GenericName=OpenRA - Dune 2000 (Cg)"
 	fi
 
