@@ -60,30 +60,20 @@ src_install()
 		$(usex tools "install-all" "install") #docs
 
 	# desktop entries
-	make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Gl" \
-		"OpenRA ver. ${MY_PV} (Gl Renderer)" ${PN} "StrategyGame" \
-		"GenericName=OpenRA - Command & Conquer (Gl)"
-	make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Gl" \
-		"OpenRA ver. ${MY_PV} (Gl Renderer)" ${PN} "StrategyGame" \
-		"GenericName=OpenRA - Red Alert (Gl)"
-	make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Gl" \
-		"OpenRA ver. ${MY_PV} (Gl Renderer)" ${PN} "StrategyGame" \
-		"GenericName=OpenRA - Dune 2000 (Gl)"
+	local myrenderer
+	for myrenderer in $(usex cg "Cg Gl" "Gl") ; do
+		make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=${myrenderer}" \
+			"OpenRA ver. ${MY_PV} (${myrenderer} renderer)" ${PN} "StrategyGame" \
+			"GenericName=OpenRA - Command & Conquer (${myrenderer})"
+		make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=${myrenderer}" \
+			"OpenRA ver. ${MY_PV} (${myrenderer} renderer)" ${PN} "StrategyGame" \
+			"GenericName=OpenRA - Red Alert (${myrenderer})"
+		make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=${myrenderer}" \
+			"OpenRA ver. ${MY_PV} (${myrenderer} renderer)" ${PN} "StrategyGame" \
+			"GenericName=OpenRA - Dune 2000 (${myrenderer})"
+	done
 	make_desktop_entry "${PN}-editor" "OpenRA ver. ${MY_PV} Map Editor" ${PN}-editor \
 		"StrategyGame" "GenericName=OpenRA - Editor"
-
-	if use cg ; then
-		# cg desktop entries
-		make_desktop_entry "${PN} Game.Mods=cnc Graphics.Renderer=Cg" \
-			"OpenRA ver. ${MY_PV} (Cg Renderer)" ${PN} "StrategyGame" \
-			"GenericName=OpenRA - Command & Conquer (Cg)"
-		make_desktop_entry "${PN} Game.Mods=ra Graphics.Renderer=Cg" \
-			"OpenRA ver. ${MY_PV} (Cg Renderer)" ${PN} "StrategyGame" \
-			"GenericName=OpenRA - Red Alert (Cg)"
-		make_desktop_entry "${PN} Game.Mods=d2k Graphics.Renderer=Cg" \
-			"OpenRA ver. ${MY_PV} (Cg Renderer)" ${PN} "StrategyGame" \
-			"GenericName=OpenRA - Dune 2000 (Cg)"
-	fi
 
 	# icons
 	insinto /usr/share/icons/
