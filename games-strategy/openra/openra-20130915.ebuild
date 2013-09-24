@@ -91,14 +91,14 @@ src_install()
 
 	# desktop directory
 	insinto ${GAMES_DATADIR_BASE}/desktop-directories
-	doins ${FILESDIR}/${PN}.directory
+	doins "${FILESDIR}"/${PN}.directory
 
 	# desktop menu
 	insinto "${XDG_CONFIG_DIRS}/menus/applications-merged"
-	doins ${FILESDIR}/games-${PN}.menu
+	doins "${FILESDIR}"/games-${PN}.menu
 
 	# generate documentation
-	dodoc ${FILESDIR}/README.gentoo HACKING CHANGELOG AUTHORS COPYING
+	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS COPYING
 	rm -v "${D}"/${GAMES_DATADIR}/${PN}/AUTHORS
 	#DOCUMENTATION was removed due to bug with make docs
 	for file in {README,CONTRIBUTING}; do \
