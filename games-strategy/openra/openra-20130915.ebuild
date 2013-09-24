@@ -90,8 +90,15 @@ src_install()
 	# docs
 	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS
 	#DOCUMENTATION was removed due to bug with make docs
+	if [[ -n "$(type -P markdown_py)" ]] ; then
+		local file; for file in {README,CONTRIBUTING}; do \
+		markdown_py ${file}.md > ${file}.html || die; dohtml ${file}.html; done
+	elif [[ -n "$(type -P markdown)" ]] ; then
 	local file; for file in {README,CONTRIBUTING}; do \
 		markdown ${file}.md > ${file}.html || die; dohtml ${file}.html; done
+	else
+		dodoc {README,CONTRIBUTING}.md
+	fi
 	# file permissions
 	prepgamesdirs
 }
