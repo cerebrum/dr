@@ -25,7 +25,7 @@ IUSE="cg"
 
 RDEPEND="dev-lang/mono[-minimal]
 	media-libs/freetype:2[X]
-	media-libs/libsdl[X,video]
+	media-libs/libsdl[X,opengl,video]
 	media-libs/openal
 	virtual/jpeg
 	virtual/opengl
