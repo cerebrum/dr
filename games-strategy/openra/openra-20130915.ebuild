@@ -62,6 +62,10 @@ src_install()
 		DESTDIR="${D}" \
 		$(usex tools "install-all" "install") #docs
 
+	# icons
+	insinto /usr/share/icons/
+	doins -r packaging/linux/hicolor
+
 	# desktop entries
 	local myrenderer
 	for myrenderer in $(usex cg "Cg Gl" "Gl") ; do
@@ -77,10 +81,6 @@ src_install()
 	done
 	make_desktop_entry "${PN}-editor" "OpenRA ver. ${MY_PV} Map Editor" ${PN}-editor \
 		"StrategyGame" "GenericName=OpenRA - Editor"
-
-	# icons
-	insinto /usr/share/icons/
-	doins -r packaging/linux/hicolor
 
 	# desktop directory
 	insinto /usr/share/desktop-directories
