@@ -8,9 +8,9 @@ inherit eutils mono-env gnome2-utils games
 
 MY_PN=${PN%-bin}
 #MY_PV=release-${PV}
-MY_PV=playtest-${PV}-2
+MY_PV=playtest-${PV}-3
 #MY_PVL=release.${PV}
-MY_PVL=playtest.${PV}.2
+MY_PVL=playtest.${PV}.3
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://open-ra.org/"
 SRC_URI="http://openra.res0l.net/assets/downloads/linux/arch/${MY_PN}-${MY_PVL}-1-any.pkg.tar.xz
