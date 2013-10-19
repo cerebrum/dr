@@ -7,7 +7,7 @@ EAPI=5
 inherit eutils mono-env gnome2-utils vcs-snapshot games
 
 #MY_PV=release-${PV}
-MY_PV=playtest-${PV}-3
+MY_PV=playtest-${PV}-5
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://open-ra.org/"
 SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
@@ -90,7 +90,7 @@ src_install()
 	doins "${FILESDIR}"/games-${PN}.menu
 
 	# docs
-	dodoc "${FILESDIR}"/README.gentoo HACKING CHANGELOG AUTHORS
+	dodoc "${FILESDIR}"/README.gentoo CHANGELOG AUTHORS
 	#DOCUMENTATION was removed due to bug with make docs
 	if [[ -n "$(type -P markdown)" ]] ; then
 		local file; for file in {README,CONTRIBUTING}; do \
