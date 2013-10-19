@@ -8,9 +8,9 @@ inherit eutils mono-env gnome2-utils games
 
 MY_PN=${PN%-bin}
 #MY_PV=release-${PV}
-MY_PV=playtest-${PV}-3
+MY_PV=playtest-${PV}-5
 #MY_PVL=release.${PV}
-MY_PVL=playtest.${PV}.3
+MY_PVL=playtest.${PV}.5
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://open-ra.org/"
 SRC_URI="http://openra.res0l.net/assets/downloads/linux/arch/${MY_PN}-${MY_PVL}-1-any.pkg.tar.xz
@@ -93,13 +93,13 @@ src_install() {
 		|| die "Install failed!"
 
 	dodoc "${FILESDIR}"/README.gentoo \
-	"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{HACKING,CHANGELOG,AUTHORS,COPYING} || die
-	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{HACKING,CHANGELOG,COPYING,INSTALL} || die
-	dohtml \
-	"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
-		|| die
-	rm -v "${D}"/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
-		|| die
+	"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{CHANGELOG,AUTHORS,COPYING} || die
+	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{CHANGELOG,COPYING} || die
+	#dohtml \
+	#"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
+	#	|| die
+	#rm -v "${D}"/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
+	#	|| die
 
 	# file permissions
 	prepgamesdirs
