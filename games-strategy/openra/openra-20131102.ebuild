@@ -59,7 +59,7 @@ src_install()
 		bindir="${GAMES_BINDIR}" \
 		libdir="$(games_get_libdir)/${PN}" \
 		DESTDIR="${D}" \
-		$(usex tools "install-all" "install") #docs
+		$(usex tools "install-all" "install") #$(usex doc "docs" "")
 
 	# icons
 	insinto /usr/share/icons/
