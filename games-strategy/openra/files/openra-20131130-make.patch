@@ -1,0 +1,29 @@
+--- 1/Makefile	2013-12-02 08:42:59.073593359 +0400
++++ 2/Makefile	2013-12-02 10:35:27.881405791 +0400
+@@ -48,10 +48,10 @@
+ datarootdir ?= $(prefix)/share
+ datadir ?= $(datarootdir)
+ bindir ?= $(prefix)/bin
+-libexecdir ?= $(prefix)/lib
++libdir ?= $(prefix)/lib
+ BIN_INSTALL_DIR = $(DESTDIR)$(bindir)
+ # TODO: separate data and binaries properly
+-DATA_INSTALL_DIR = $(DESTDIR)$(libexecdir)/openra
++DATA_INSTALL_DIR = $(DESTDIR)$(datadir)/openra
+ 
+ # install tools
+ RM = rm
+@@ -349,9 +349,10 @@
+ 	@$(CP) thirdparty/SharpFont.dll.config "$(DATA_INSTALL_DIR)"
+ 	@$(INSTALL_PROGRAM) thirdparty/Mono.Nat.dll "$(DATA_INSTALL_DIR)"
+ 	@$(CP) thirdparty/LuaInterface.dll.config "$(DATA_INSTALL_DIR)"
+-	@$(INSTALL_PROGRAM) thirdparty/liblua-linux32.so "$(DATA_INSTALL_DIR)"
+-	@$(INSTALL_PROGRAM) thirdparty/liblua-linux64.so "$(DATA_INSTALL_DIR)"
+-	@$(INSTALL_PROGRAM) thirdparty/liblua-osx.dylib "$(DATA_INSTALL_DIR)"
++	@case "$${OSTYPE}" in \
++		linux*)   $(INSTALL_PROGRAM) thirdparty/liblua-linux$$(getconf LONG_BIT).so "$(DATA_INSTALL_DIR)"  ;; \
++		darwin*) $(INSTALL_PROGRAM) thirdparty/liblua-osx.dylib "$(DATA_INSTALL_DIR)"  ;; \
++	esac
+ 
+ 	@echo "#!/bin/sh" 				>  openra
+ 	@echo 'BINDIR=$$(dirname $$(readlink -f $$0))'	>> openra
