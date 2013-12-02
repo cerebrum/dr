@@ -10,13 +10,13 @@
     <Name>OpenRA-Bin</Name>
     <Directory>openra-bin.directory</Directory>
     <Include>
-      <Filename>openra-bin_Game.Mods=d2k_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
-      <Filename>openra-bin_Game.Mods=d2k_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
-      <Filename>openra-bin_Game.Mods=cnc_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
-      <Filename>openra-bin_Game.Mods=cnc_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mod=d2k_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mod=d2k_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mod=cnc_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mod=cnc_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
       <Filename>openra-bin-editor-openra-bin.desktop</Filename>
-      <Filename>openra-bin_Game.Mods=ra_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
-      <Filename>openra-bin_Game.Mods=ra_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mod=ra_Graphics.Renderer=Cg-openra-bin.desktop</Filename>
+      <Filename>openra-bin_Game.Mod=ra_Graphics.Renderer=Gl-openra-bin.desktop</Filename>
     </Include>
   </Menu>
   </Menu>
