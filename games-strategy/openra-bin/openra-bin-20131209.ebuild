@@ -23,7 +23,8 @@ IUSE="cg"
 
 RDEPEND="dev-lang/mono[-minimal]
 	media-libs/freetype:2[X]
-	media-libs/libsdl[X,opengl,video]
+	|| ( media-libs/libsdl2[X,opengl,video]
+	media-libs/libsdl[X,opengl,video] )
 	media-libs/openal
 	virtual/jpeg
 	virtual/opengl
@@ -36,12 +37,6 @@ MY_LIBDIR="/usr/lib"
 src_prepare() {
 	# remove old and unnecessary desktop file
 	rm -v "${WORKDIR}"/${GAMES_DATADIR_BASE}/applications/${MY_PN}.desktop || die
-	# remove redundant libs
-	if [[ "$(getconf LONG_BIT)" == "64" ]]; then \
-		rm -v "${WORKDIR}/${MY_LIBDIR}/${MY_PN}/liblua-linux32.so" || die; \
-		else \
-		rm -v "${WORKDIR}/${MY_LIBDIR}/${MY_PN}/liblua-linux64.so" || die; \
-	fi
 	# move program files to correct binary location
 	mkdir -v "${WORKDIR}"/${GAMES_PREFIX_OPT} || die
 	mv -v "${WORKDIR}"/"${MY_LIBDIR}"/${MY_PN} \
