@@ -21,7 +21,8 @@ IUSE="cg doc tools"
 RDEPEND="dev-dotnet/libgdiplus
 	dev-lang/mono
 	media-libs/freetype:2[X]
-	media-libs/libsdl[X,opengl,video]
+	|| ( media-libs/libsdl2[X,opengl,video]
+	media-libs/libsdl[X,opengl,video] )
 	media-libs/openal
 	virtual/jpeg
 	virtual/opengl
@@ -42,7 +43,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/openra-20131130-make.patch"
+	epatch "${FILESDIR}/openra-20131209-make.patch"
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
