@@ -17,8 +17,8 @@ SRC_URI="http://openra.res0l.net/assets/downloads/linux/arch/${MY_PN}-${MY_PVL}-
 			 -> ${P}.tar.xz"
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="amd64 x86"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
+#KEYWORDS="~amd64 ~x86"
 IUSE="cg"
 
 RDEPEND="dev-lang/mono[-minimal]
