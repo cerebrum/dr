@@ -1,0 +1,27 @@
+#!/sbin/runscript
+# Copyright 1999-2014 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v3
+
+DAEMON=twonkystarter
+NAME=twonky
+TVMSUSER=twonkymedia
+TVMSHOME=`grep ^$TVMSUSER: /etc/passwd |cut -d: -f6`
+TVMSROOT=/opt/twonky
+TVMSINI=$TVMSHOME/twonkyserver.ini
+TVMSBIN=$TVMSROOT/$DAEMON
+LOGFILE=/var/log/twonky/twonky.log
+TMSOPTIONS="-ip $TVMSIP -inifile $TVMSINI -logfile $LOGFILE"
+
+start() {
+	ebegin "Starting twonky media server"
+	[ "" == "$TVMSIP" ] && { eend "Please insert your IP address into /etc/conf.d/$NAME" ; exit; }
+	start-stop-daemon --start --stdout $LOGFILE --stderr $LOGFILE --user $TVMSUSER --background --exec $TVMSBIN -- $TMSOPTIONS
+	eend $?
+
+}
+
+stop() {
+	ebegin "Shutting down twonky media server"
+	start-stop-daemon --stop --name $DAEMON
+	eend $?
+}
