@@ -38,6 +38,9 @@ src_prepare() {
 	mkdir -v "${WORKDIR}"/${GAMES_PREFIX_OPT} || die
 	mv -v "${WORKDIR}"/"${MY_LIBDIR}"/${MY_PN} \
 		"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN} || die
+	# remove unnecessary thirdparty files
+	rm -v "${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{liblua*.*.so,libSDL2*.*.so} || die
+
 	mv -v ${ICON_DIR}/hicolor/scalable/apps/${MY_PN}.svg ${ICON_DIR}/hicolor/scalable/apps/${PN}.svg || die
 	local size; for size in {16x16,32x32,48x48,64x64,128x128}; do mv -v \
 		${ICON_DIR}/hicolor/${size}/apps/${MY_PN}.png \

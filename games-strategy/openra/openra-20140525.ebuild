@@ -42,6 +42,7 @@ src_unpack() {
 
 src_prepare() {
 	epatch "${FILESDIR}/openra-20131209-make.patch"
+	epatch "${FILESDIR}/openra-20140525-make.patch"
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
