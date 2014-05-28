@@ -77,8 +77,8 @@ src_install() {
 		|| die "Install failed!"
 
 	dodoc "${FILESDIR}"/README.gentoo \
-	"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{CHANGELOG,AUTHORS,COPYING} || die
-	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/{CHANGELOG,COPYING} || die
+	"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{AUTHORS,COPYING} || die
+	rm -v ${D}/${GAMES_PREFIX_OPT}/${PN}/COPYING || die
 	#dohtml \
 	#"${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{README,CONTRIBUTING,DOCUMENTATION}.html \
 	#	|| die

@@ -84,7 +84,7 @@ src_install()
 	doins "${FILESDIR}"/games-${PN}.menu
 
 	# docs
-	dodoc "${FILESDIR}"/README.gentoo CHANGELOG AUTHORS
+	dodoc "${FILESDIR}"/README.gentoo AUTHORS
 	#DOCUMENTATION was removed due to bug with make docs
 	if [[ -n "$(type -P markdown)" ]] ; then
 		local file; for file in {README,CONTRIBUTING}; do \
