@@ -10,13 +10,10 @@
     <Name>OpenRA</Name>
     <Directory>openra.directory</Directory>
     <Include>
-      <Filename>openra_Game.Mod=d2k_Graphics.Renderer=Cg-openra.desktop</Filename>
-      <Filename>openra_Game.Mod=d2k_Graphics.Renderer=Gl-openra.desktop</Filename>
-      <Filename>openra_Game.Mod=cnc_Graphics.Renderer=Cg-openra.desktop</Filename>
-      <Filename>openra_Game.Mod=cnc_Graphics.Renderer=Gl-openra.desktop</Filename>
+      <Filename>openra_Game.Mod=d2k-openra.desktop</Filename>
+      <Filename>openra_Game.Mod=cnc-openra.desktop</Filename>
       <Filename>openra-editor-openra.desktop</Filename>
-      <Filename>openra_Game.Mod=ra_Graphics.Renderer=Cg-openra.desktop</Filename>
-      <Filename>openra_Game.Mod=ra_Graphics.Renderer=Gl-openra.desktop</Filename>
+      <Filename>openra_Game.Mod=ra-openra.desktop</Filename>
     </Include>
   </Menu>
   </Menu>
