@@ -48,7 +48,7 @@ src_prepare() {
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
-		-i mods/{ra,cnc,d2k}/mod.yaml || die
+		-i mods/{ra,cnc,d2k,modchooser}/mod.yaml || die
 }
 
 src_compile() {
