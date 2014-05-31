@@ -16,7 +16,7 @@ LICENSE="GPL-3"
 SLOT="0"
 #KEYWORDS="amd64 x86"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc tools"
+IUSE="doc +tools +xdg +zenity"
 
 RDEPEND="dev-dotnet/libgdiplus
 	dev-lang/mono
@@ -24,7 +24,9 @@ RDEPEND="dev-dotnet/libgdiplus
 	media-libs/libsdl2[X,opengl,video]
 	media-libs/openal
 	virtual/jpeg
-	virtual/opengl"
+	virtual/opengl
+	xdg? ( x11-misc/xdg-utils )
+	zenity? ( gnome-extra/zenity )"
 DEPEND="${RDEPEND}
 	doc? ( || ( app-text/discount
 		app-text/peg-markdown

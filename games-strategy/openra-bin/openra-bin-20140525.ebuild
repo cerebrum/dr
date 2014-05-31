@@ -19,13 +19,16 @@ LICENSE="GPL-3"
 SLOT="0"
 #KEYWORDS="amd64 x86"
 KEYWORDS="~amd64 ~x86"
+IUSE="+xdg +zenity"
 
 RDEPEND="dev-lang/mono[-minimal]
 	media-libs/freetype:2[X]
 	media-libs/libsdl2[X,opengl,video]
 	media-libs/openal
 	virtual/jpeg
-	virtual/opengl"
+	virtual/opengl
+	xdg? ( x11-misc/xdg-utils )
+	zenity? ( gnome-extra/zenity )"
 
 ICON_DIR="usr/share/icons"
 DESK_APPS="${GAMES_DATADIR_BASE}/applications"

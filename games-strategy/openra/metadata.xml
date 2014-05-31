@@ -12,9 +12,10 @@
 		<bugs-to>https://github.com/OpenRA/OpenRA/issues</bugs-to>
 	</upstream>
 	<use>
-		<flag name='cg'>Enable support of old renderer through NVidia Cg</flag>
 		<flag name='doc'>Generate additional documentation</flag>
 		<flag name="tools">Install some development tools
 			such as editor.</flag>
+		<flag name='xdg'>xdg-utils are used to open web pages</flag>
+		<flag name='zenity'>zenity is used to display crash dialogs</flag>
 	</use>
 </pkgmetadata>
