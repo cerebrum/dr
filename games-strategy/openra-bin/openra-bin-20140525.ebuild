@@ -27,6 +27,7 @@ RDEPEND="dev-lang/mono[-minimal]
 	media-libs/openal
 	virtual/jpeg
 	virtual/opengl
+	=dev-lang/lua-5.1*
 	xdg? ( x11-misc/xdg-utils )
 	zenity? ( gnome-extra/zenity )"
 
