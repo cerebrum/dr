@@ -44,7 +44,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-configure.patch"
+	epatch "${FILESDIR}/${PN}-20140601-configure.patch"
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
