@@ -45,6 +45,14 @@ src_prepare() {
 	# remove unnecessary thirdparty files
 	rm -v "${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/{liblua*.*.so,libSDL2*.*.so} || die
 
+	# fix library config files
+	sed \
+		-e "/lua51.dll/s/liblua\(32\|64\).5.1.5.so/liblua.so.5/" \
+		-i "${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/Eluant.dll.config || die
+	sed \
+		-e "/SDL2.dll/s/libSDL2\(32\|64\).2.0.2.so/libSDL2.so/" \
+		-i "${WORKDIR}"/${GAMES_PREFIX_OPT}/${PN}/SDL2-CS.dll.config || die
+
 	mv -v ${ICON_DIR}/hicolor/scalable/apps/${MY_PN}.svg ${ICON_DIR}/hicolor/scalable/apps/${PN}.svg || die
 	local size; for size in {16x16,32x32,48x48,64x64,128x128}; do mv -v \
 		${ICON_DIR}/hicolor/${size}/apps/${MY_PN}.png \
