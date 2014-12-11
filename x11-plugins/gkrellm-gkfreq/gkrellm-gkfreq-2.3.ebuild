@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit gkrellm-plugin
+EAPI=5
+inherit eutils flag-o-matic toolchain-funcs gkrellm-plugin
 
 DESCRIPTION="Displays CPU's current frequencies in gkrellm2"
 HOMEPAGE="http://sourceforge.net/projects/gkrellm-gkfreq/"
@@ -13,4 +14,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-PLUGIN_SO=gkrellm-gkfreq.so
+src_prepare() {
+	epatch "${FILESDIR}/${P}-make.patch"
+	filter-ldflags -s
+	CC=$(tc-getCC)
+}

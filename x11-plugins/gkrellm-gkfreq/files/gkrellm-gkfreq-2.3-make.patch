@@ -1,0 +1,19 @@
+--- Makefile	2013-02-28 01:52:26.000000000 +0400
++++ Makefile~	2014-12-10 22:51:53.427204856 +0300
+@@ -1,10 +1,14 @@
++CC ?= gcc
++CFLAGS ?= -O2
++LDFLAGS ?=
++
+ all: gkrellm-gkfreq.so
+ 
+ gkrellm-gkfreq.o: gkrellm-gkfreq.c
+-	gcc -fPIC -O2 -Wall `pkg-config gtk+-2.0 --cflags` -c gkrellm-gkfreq.c
++	$(CC) -fPIC $(CFLAGS) -Wall `pkg-config gtk+-2.0 --cflags` -c gkrellm-gkfreq.c
+ 
+ gkrellm-gkfreq.so: gkrellm-gkfreq.o
+-	gcc -shared -Wall -o gkrellm-gkfreq.so gkrellm-gkfreq.o
++	$(CC) -shared $(LDFLAGS) -Wall -o gkrellm-gkfreq.so gkrellm-gkfreq.o
+ 	@echo " "
+ 	@echo "    Compilation done!"
+ 	@echo " "
