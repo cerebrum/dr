@@ -66,8 +66,8 @@ src_install() {
 	doins ${PN}.conf
 
 	newconfd "${FILESDIR}"/${PN}-1.0.25.confd ${PN}
-	newinitd "${FILESDIR}"/${PF}.initd ${PN}
-	systemd_newunit "${FILESDIR}"/${PF}.service ${PN}.service
+	newinitd "${FILESDIR}"/${P}.initd ${PN}
+	systemd_newunit "${FILESDIR}"/${P}.service ${PN}.service
 	echo "d /run/${PN} 0755 ${PN} ${PN} -" > "${T}"/${PN}.conf
 	systemd_dotmpfilesd "${T}"/${PN}.conf
 

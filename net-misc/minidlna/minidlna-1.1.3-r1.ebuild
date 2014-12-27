@@ -42,7 +42,6 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-1.1.2-Fixed-a-problem-when-SSDP-multicast-come-from-a-diff.patch
-	epatch "${FILESDIR}"/${PN}-1.1.2-ssdp-location-ip-changed-to-192.168.88.1.patch
 	sed -e "/log_dir/s:/var/log:/var/log/${PN}:" \
 		-e "/db_dir/s:/var/cache/:/var/lib/:" \
 		-i ${PN}.conf || die
@@ -67,8 +66,8 @@ src_install() {
 	doins ${PN}.conf
 
 	newconfd "${FILESDIR}"/${PN}-1.0.25.confd ${PN}
-	newinitd "${FILESDIR}"/${PF}.initd ${PN}
-	systemd_newunit "${FILESDIR}"/${PF}.service ${PN}.service
+	newinitd "${FILESDIR}"/${PN}-1.1.2.initd ${PN}
+	systemd_newunit "${FILESDIR}"/${PN}-1.1.2.service ${PN}.service
 	echo "d /run/${PN} 0755 ${PN} ${PN} -" > "${T}"/${PN}.conf
 	systemd_dotmpfilesd "${T}"/${PN}.conf
 
