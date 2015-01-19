@@ -26,6 +26,7 @@ RDEPEND="dev-dotnet/libgdiplus
 	virtual/jpeg
 	virtual/opengl
 	=dev-lang/lua-5.1*
+	dev-dotnet/nuget
 	xdg? ( x11-misc/xdg-utils )
 	zenity? ( gnome-extra/zenity )"
 DEPEND="${RDEPEND}
@@ -47,7 +48,8 @@ src_prepare() {
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
-		-i mods/{ra,cnc,d2k,modchooser}/mod.yaml || die
+		-i mods/{ra,cnc,d2k,modchooser,ts}/mod.yaml || die
+	emake cli-dependencies
 }
 
 src_compile() {
