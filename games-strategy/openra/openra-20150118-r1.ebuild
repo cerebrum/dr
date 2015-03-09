@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -26,6 +26,7 @@ RDEPEND="dev-dotnet/libgdiplus
 	virtual/jpeg
 	virtual/opengl
 	=dev-lang/lua-5.1*
+	dev-dotnet/nuget-for-monodevelop
 	xdg? ( x11-misc/xdg-utils )
 	zenity? ( gnome-extra/zenity )"
 DEPEND="${RDEPEND}
@@ -44,11 +45,11 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-20140601-configure.patch"
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
-		-i mods/{ra,cnc,d2k,modchooser}/mod.yaml || die
+		-i mods/{ra,cnc,d2k,modchooser,ts}/mod.yaml || die
+	emake cli-dependencies
 }
 
 src_compile() {
@@ -124,4 +125,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-

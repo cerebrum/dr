@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -6,16 +6,16 @@ EAPI=5
 
 inherit eutils mono-env gnome2-utils vcs-snapshot games
 
-#MY_PV=release-${PV}
-MY_PV=playtest-${PV}
+MY_PV=release-${PV}
+#MY_PV=playtest-${PV}
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://open-ra.org/ http://wiki.openra.net"
 SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="amd64 x86"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
+#KEYWORDS="~amd64 ~x86"
 IUSE="doc +tools +xdg +zenity"
 
 RDEPEND="dev-dotnet/libgdiplus
@@ -44,7 +44,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-20140601-configure.patch"
 	# register game-version
 	sed \
 		-e "/Version/s/{DEV_VERSION}/${MY_PV}/" \
@@ -124,4 +123,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-
