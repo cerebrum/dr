@@ -26,7 +26,7 @@ RDEPEND="dev-dotnet/libgdiplus
 	virtual/jpeg
 	virtual/opengl
 	=dev-lang/lua-5.1*
-	dev-dotnet/nuget-for-monodevelop
+	<=dev-dotnet/nuget-2.8.2
 	xdg? ( x11-misc/xdg-utils )
 	zenity? ( gnome-extra/zenity )"
 DEPEND="${RDEPEND}
