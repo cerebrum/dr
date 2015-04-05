@@ -1,0 +1,22 @@
+From a8b90268762ba436c8d14b3f0458e488d2f3b089 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Matthias=20Mail=C3=A4nder?= <matthias@mailaender.name>
+Date: Sun, 5 Apr 2015 12:46:41 +0200
+Subject: [PATCH] fix CS0172
+
+---
+ OpenRA.Mods.Common/Traits/World/TerrainGeometryOverlay.cs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/OpenRA.Mods.Common/Traits/World/TerrainGeometryOverlay.cs b/OpenRA.Mods.Common/Traits/World/TerrainGeometryOverlay.cs
+index 5b18ea4..e416707 100644
+--- a/OpenRA.Mods.Common/Traits/World/TerrainGeometryOverlay.cs
++++ b/OpenRA.Mods.Common/Traits/World/TerrainGeometryOverlay.cs
+@@ -48,7 +48,7 @@ public void Render(WorldRenderer wr)
+ 				var height = (int)map.MapHeight.Value[uv];
+ 				var tile = map.MapTiles.Value[uv];
+ 				var ti = tileSet.GetTileInfo(tile);
+-				var ramp = ti != null ? ti.RampType : 0;
++				var ramp = ti != null ? (int)ti.RampType : 0;
+ 
+ 				var corners = map.CellCorners[ramp];
+ 				var color = corners.Select(c => colors[height + c.Z / 512]).ToArray();
