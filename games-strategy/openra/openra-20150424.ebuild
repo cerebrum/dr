@@ -64,8 +64,7 @@ src_install()
 		$(usex tools "install-all" "install") install-linux-scripts
 	emake \
 		datadir="/usr/share" \
-		DESTDIR="${D}" \
-		install-linux-mime
+		DESTDIR="${D}" install-linux-mime
 
 	# icons
 	insinto /usr/share/icons/
@@ -115,6 +114,7 @@ pkg_postinst() {
 	games_pkg_postinst
 	gnome2_icon_cache_update
 	fdo-mime_desktop_database_update
+	fdo-mime_mime_database_update
 
 	elog
 	elog "If you have problems starting the game or want to know more"
@@ -125,4 +125,5 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 	fdo-mime_desktop_database_update
+	fdo-mime_mime_database_update
 }
