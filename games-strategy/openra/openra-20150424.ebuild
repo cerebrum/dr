@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils mono-env gnome2-utils vcs-snapshot games
+inherit eutils mono-env gnome2-utils vcs-snapshot fdo-mime games
 
 MY_PV=release-${PV}
 #MY_PV=playtest-${PV}
@@ -114,6 +114,7 @@ pkg_preinst() {
 pkg_postinst() {
 	games_pkg_postinst
 	gnome2_icon_cache_update
+	fdo-mime_desktop_database_update
 
 	elog
 	elog "If you have problems starting the game or want to know more"
@@ -123,4 +124,5 @@ pkg_postinst() {
 
 pkg_postrm() {
 	gnome2_icon_cache_update
+	fdo-mime_desktop_database_update
 }
