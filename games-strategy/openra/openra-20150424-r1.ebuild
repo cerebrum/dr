@@ -6,16 +6,16 @@ EAPI=5
 
 inherit eutils mono-env gnome2-utils vcs-snapshot fdo-mime games
 
-#MY_PV=release-${PV}
-MY_PV=playtest-${PV}
+MY_PV=release-${PV}
+#MY_PV=playtest-${PV}
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
-HOMEPAGE="http://www.openra.net/"
+HOMEPAGE="http://open-ra.org/ http://wiki.openra.net"
 SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="amd64 x86"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
+#KEYWORDS="~amd64 ~x86"
 IUSE="doc +tools +xdg +zenity"
 
 RDEPEND="dev-dotnet/libgdiplus
@@ -23,10 +23,10 @@ RDEPEND="dev-dotnet/libgdiplus
 	media-libs/freetype:2[X]
 	media-libs/libsdl2[X,opengl,video]
 	media-libs/openal
-	virtual/jpeg:0
+	virtual/jpeg:*
 	virtual/opengl
 	=dev-lang/lua-5.1*:0
-	<=dev-dotnet/nuget-2.8.2
+	dev-dotnet/nuget
 	xdg? ( x11-misc/xdg-utils )
 	zenity? ( gnome-extra/zenity )"
 DEPEND="${RDEPEND}
@@ -64,7 +64,11 @@ src_install()
 		$(usex tools "install-all" "install") install-linux-scripts
 	emake \
 		datadir="/usr/share" \
-		DESTDIR="${D}" install-linux-mime install-linux-icons
+		DESTDIR="${D}" install-linux-mime
+
+	# icons
+	insinto /usr/share/icons/
+	doins -r packaging/linux/hicolor
 
 	# desktop entries
 	make_desktop_entry "${PN} Game.Mod=cnc" "OpenRA ver. ${MY_PV}" ${PN} \
