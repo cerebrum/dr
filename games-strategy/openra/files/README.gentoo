@@ -109,10 +109,10 @@ pretty stable in most cases but they have usually more features wich are
 needed to be tested before inclusion into release. So, if you have any
 problems, please report them to the IRC channel #openra on irc.freenode.net
 (Use http://webchat.freenode.net/ if you don't have IRC client)
-or to the bug-tracker (http://bugs.open-ra.org).
+or to the bug-tracker (http://bugs.openra.net).
 
 You may also see servers list with
-http://master.open-ra.org/list.php
+http://www.openra.net/games
 or by using orabot on IRC channel:
 ]games
 to see the games wich are waiting to start or
