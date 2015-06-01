@@ -7,7 +7,7 @@
 		<description>Proxy maintainer. CC him on bugs</description>
 	</maintainer>
 	<upstream>
-		<changelog>http://openra.res0l.net/news/</changelog>
+		<changelog>http://www.openra.net/news/</changelog>
 		<doc lang="en">https://github.com/OpenRA/OpenRA/wiki</doc>
 		<bugs-to>https://github.com/OpenRA/OpenRA/issues</bugs-to>
 	</upstream>
