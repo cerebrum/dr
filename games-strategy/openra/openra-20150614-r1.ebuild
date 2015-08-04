@@ -19,7 +19,7 @@ KEYWORDS="amd64 x86"
 IUSE="doc +tools +xdg +zenity"
 
 RDEPEND="dev-dotnet/libgdiplus
-	dev-lang/mono
+	>=dev-lang/mono-3.2
 	media-libs/freetype:2[X]
 	media-libs/libsdl2[X,opengl,video]
 	media-libs/openal
