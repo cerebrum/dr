@@ -72,8 +72,6 @@ src_install()
 		"StrategyGame" "GenericName=OpenRA - Red Alert"
 	make_desktop_entry "${PN} Game.Mod=d2k" "OpenRA ver. ${MY_PV}" ${PN} \
 		"StrategyGame" "GenericName=OpenRA - Dune 2000"
-	make_desktop_entry "${PN}-editor" "OpenRA ver. ${MY_PV} Map Editor" ${PN}-editor \
-		"StrategyGame" "GenericName=OpenRA - Editor"
 
 	# desktop directory
 	insinto /usr/share/desktop-directories
