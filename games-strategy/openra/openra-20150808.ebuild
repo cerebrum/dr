@@ -16,7 +16,7 @@ LICENSE="GPL-3"
 SLOT="0"
 #KEYWORDS="amd64 x86"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc +tools +xdg +zenity"
+IUSE="+debug doc +tools +xdg +zenity"
 
 RDEPEND="dev-dotnet/libgdiplus
 	>=dev-lang/mono-3.2
@@ -48,13 +48,13 @@ src_prepare() {
 }
 
 src_compile() {
-	emake $(usex tools "all" "")
+	emake $(usex tools "all" "") $(usex debug "" "DEBUG=false")
 	emake VERSION=${MY_PV} docs
 }
 
 src_install()
 {
-	emake \
+	emake $(usex debug "" "DEBUG=false") \
 		datadir="${GAMES_DATADIR}" \
 		bindir="${GAMES_BINDIR}" \
 		libdir="$(games_get_libdir)/${PN}" \
