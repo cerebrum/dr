@@ -49,7 +49,7 @@ src_prepare() {
 
 src_compile() {
 	emake $(usex tools "all" "") $(usex debug "" "DEBUG=false")
-	emake VERSION=${MY_PV} docs
+	emake VERSION=${MY_PV} docs man-page
 }
 
 src_install()
@@ -60,7 +60,7 @@ src_install()
 		libdir="$(games_get_libdir)/${PN}" \
 		gameinstalldir="${GAMES_DATADIR}/${PN}" \
 		DESTDIR="${D}" \
-		$(usex tools "install-all" "install") install-linux-scripts
+		$(usex tools "install-all" "install") install-linux-scripts install-man-page
 	emake \
 		datadir="/usr/share" \
 		DESTDIR="${D}" install-linux-mime install-linux-icons
@@ -82,7 +82,7 @@ src_install()
 	doins "${FILESDIR}"/games-${PN}.menu
 
 	# docs
-	dodoc "${FILESDIR}"/README.gentoo AUTHORS
+	dodoc "${FILESDIR}"/README.gentoo
 	if [[ -n "$(type -P markdown)" ]] ; then
 		local file; for file in {README,CONTRIBUTING,DOCUMENTATION,Lua-API}; do \
 		markdown ${file}.md > ${file}.html && dohtml ${file}.html || die; done
