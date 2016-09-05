@@ -6,17 +6,17 @@ EAPI=5
 
 inherit eutils mono-env gnome2-utils vcs-snapshot fdo-mime games
 
-MY_PV=release-${PV}
-#MY_PV=playtest-${PV}
+#MY_PV=release-${PV}
+MY_PV=playtest-${PV}
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://www.openra.net/"
 SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
-#KEYWORDS="~amd64 ~x86"
-IUSE="+debug doc +tools +xdg +zenity"
+KEYWORDS="~amd64 ~x86"
+IUSE="+debug doc -nuget +tools +xdg +zenity"
+RESTRICT="mirror"
 
 RDEPEND="dev-dotnet/libgdiplus
 	>=dev-lang/mono-3.2
@@ -29,6 +29,7 @@ RDEPEND="dev-dotnet/libgdiplus
 	xdg? ( x11-misc/xdg-utils )
 	zenity? ( gnome-extra/zenity )"
 DEPEND="${RDEPEND}
+	nuget? ( dev-dotnet/nuget )
 	doc? ( || ( app-text/discount
 		app-text/peg-markdown
 		dev-python/markdown
@@ -44,6 +45,9 @@ src_unpack() {
 }
 
 src_prepare() {
+	local NUGET=$(usex nuget "true" "false");
+	sed "s/if \[ ! \$TRAVIS \]/if ${NUGET} \&\& \[ ! \$TRAVIS \]/" \
+		-i thirdparty/fetch-thirdparty-deps.sh || die
 	emake cli-dependencies
 }
 
@@ -108,11 +112,6 @@ pkg_postinst() {
 	gnome2_icon_cache_update
 	fdo-mime_desktop_database_update
 	fdo-mime_mime_database_update
-
-	elog
-	elog "If you have problems starting the game or want to know more"
-	elog "about it read README.gentoo file in your doc folder."
-	elog
 }
 
 pkg_postrm() {
