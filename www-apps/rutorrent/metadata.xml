@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <herd>no-herd</herd>
-<maintainer>
-	<email>energumenoster@gmail.com</email>
+<maintainer type="person">
+	<email>diamond@hi-net.ru</email>
+	<description>Maintainer. CC him on bugs</description>
 </maintainer>
   <use>
   <flag name='geoip'>Enable GeoIP support for ruTorrent Geo IP Plugin</flag>

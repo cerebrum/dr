@@ -1,27 +1,27 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="4"
+EAPI=5
 
-inherit webapp eutils depend.php
+inherit eutils webapp
 
 DESCRIPTION="ruTorrent is a front-end for the popular Bittorrent client rTorrent"
-HOMEPAGE="http://code.google.com/p/rutorrent/"
+HOMEPAGE="https://github.com/Novik/ruTorrent"
 SRC_URI="
 			http://dl.bintray.com/novik65/generic/${P}.tar.gz
 			http://dl.bintray.com/novik65/generic/plugins-${PV}.tar.gz"
 
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~ppc ~x86"
-IUSE="geoip"
+KEYWORDS="~amd64 ~x86"
+IUSE="apache2 geoip"
 
 need_httpd_cgi
-need_php_httpd
 
-DEPEND="|| ( dev-lang/php[xml,gd] dev-lang/php[xml,gd-external] )
-	www-apache/mod_xsendfile
-	geoip? ( >=dev-php/pecl-geoip-1.0.8-r1 )"
+RDEPEND="|| ( dev-lang/php[xml,gd] dev-lang/php[xml,gd-external] )
+	virtual/httpd-php
+	apache2? ( www-apache/mod_xsendfile )
+	geoip? ( dev-php/pecl-geoip )"
 
 S="${WORKDIR}"
 
