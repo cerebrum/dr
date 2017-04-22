@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<herd>proxy-maintainers</herd>
-	<maintainer>
+	<maintainer type="person">
 		<email>diamond@hi-net.ru</email>
-		<description>Proxy maintainer. CC him on bugs</description>
+		<description>Maintainer. CC him on bugs</description>
 	</maintainer>
 	<upstream>
 		<changelog>http://www.openra.net/news/</changelog>
@@ -16,8 +15,6 @@
 		<flag name='doc'>Generate additional documentation</flag>
 		<flag name='nuget'>Use NuGet utility to fetch thirdparty dependencies
 			instead of regular cURL utility</flag>
-		<flag name="tools">Install some development tools
-			such as editor.</flag>
 		<flag name='xdg'>xdg-utils are used to open web pages</flag>
 		<flag name='zenity'>zenity is used to display crash dialogs</flag>
 	</use>

@@ -4,10 +4,10 @@
 
 EAPI=5
 
-inherit eutils mono-env gnome2-utils vcs-snapshot fdo-mime games
+inherit eutils mono-env gnome2-utils vcs-snapshot fdo-mime
 
-#MY_PV=release-${PV}
-MY_PV=playtest-${PV}
+MY_PV=release-${PV}
+#MY_PV=playtest-${PV}
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://www.openra.net/"
 SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
@@ -15,7 +15,7 @@ SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+debug doc -nuget +tools +xdg +zenity"
+IUSE="+debug doc -nuget +xdg +zenity"
 RESTRICT="mirror"
 
 RDEPEND="dev-dotnet/libgdiplus
@@ -37,7 +37,6 @@ DEPEND="${RDEPEND}
 
 pkg_setup() {
 	mono-env_pkg_setup
-	games_pkg_setup
 }
 
 src_unpack() {
@@ -52,19 +51,19 @@ src_prepare() {
 }
 
 src_compile() {
-	emake $(usex tools "all" "") $(usex debug "" "DEBUG=false")
+	emake $(usex debug "" "DEBUG=false")
 	emake VERSION=${MY_PV} docs man-page
 }
 
 src_install()
 {
 	emake $(usex debug "" "DEBUG=false") \
-		datadir="${GAMES_DATADIR}" \
-		bindir="${GAMES_BINDIR}" \
-		libdir="$(games_get_libdir)/${PN}" \
-		gameinstalldir="${GAMES_DATADIR}/${PN}" \
+		datadir="/usr/share/games" \
+		bindir="/usr/games/bin" \
+		libdir="/usr/games/$(get_libdir)/${PN}" \
+		gameinstalldir="/usr/share/games/${PN}" \
 		DESTDIR="${D}" \
-		$(usex tools "install-all" "install") install-linux-scripts install-man-page
+		install install-linux-scripts install-man-page
 	emake \
 		datadir="/usr/share" \
 		DESTDIR="${D}" install-linux-mime install-linux-icons
@@ -99,8 +98,6 @@ src_install()
 	else
 		dodoc {README,CONTRIBUTING,DOCUMENTATION,Lua-API}.md
 	fi
-	# file permissions
-	prepgamesdirs
 }
 
 pkg_preinst() {
@@ -108,7 +105,6 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	games_pkg_postinst
 	gnome2_icon_cache_update
 	fdo-mime_desktop_database_update
 	fdo-mime_mime_database_update
