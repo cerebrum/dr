@@ -1,13 +1,12 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
-inherit eutils mono-env gnome2-utils vcs-snapshot fdo-mime
+inherit eutils mono-env gnome2-utils vcs-snapshot xdg-utils
 
-#MY_PV=release-${PV}
-MY_PV=playtest-${PV}
+MY_PV=release-${PV}
+#MY_PV=playtest-${PV}
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer, Red Alert and Dune2k"
 HOMEPAGE="http://www.openra.net/"
 SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
@@ -72,11 +71,11 @@ src_install()
 		DESTDIR="${D}" install-linux-mime install-linux-icons
 
 	# desktop entries
-	make_desktop_entry "${PN} Game.Mod=cnc" "OpenRA ver. ${MY_PV}" ${PN} \
+	make_desktop_entry "${PN}-cnc" "OpenRA ver. ${MY_PV}" "${PN}-cnc" \
 		"StrategyGame" "GenericName=OpenRA - Command & Conquer"
-	make_desktop_entry "${PN} Game.Mod=ra" "OpenRA ver. ${MY_PV}" ${PN} \
+	make_desktop_entry "${PN}-ra" "OpenRA ver. ${MY_PV}" "${PN}-ra" \
 		"StrategyGame" "GenericName=OpenRA - Red Alert"
-	make_desktop_entry "${PN} Game.Mod=d2k" "OpenRA ver. ${MY_PV}" ${PN} \
+	make_desktop_entry "${PN}-d2k" "OpenRA ver. ${MY_PV}" "${PN}-d2k" \
 		"StrategyGame" "GenericName=OpenRA - Dune 2000"
 
 	# desktop directory
@@ -109,12 +108,12 @@ pkg_preinst() {
 
 pkg_postinst() {
 	gnome2_icon_cache_update
-	fdo-mime_desktop_database_update
-	fdo-mime_mime_database_update
+	fdo-xdg_desktop_database_update
+	xdg_mimeinfo_database_update
 }
 
 pkg_postrm() {
 	gnome2_icon_cache_update
-	fdo-mime_desktop_database_update
-	fdo-mime_mime_database_update
+	fdo-xdg_desktop_database_update
+	xdg_mimeinfo_database_update
 }
