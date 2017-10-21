@@ -37,6 +37,8 @@ DOCS="${FILESDIR}/README.gentoo"
 HTML_DOCS=""
 
 pkg_setup() {
+	has network-sandbox $FEATURES && \
+		die "games-strategy/openra requires 'network-sandbox' to be disabled in FEATURES"
 	mono-env_pkg_setup
 }
 
