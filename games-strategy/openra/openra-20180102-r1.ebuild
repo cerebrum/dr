@@ -47,6 +47,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	sed -i 's|prefix ?= /usr/local|prefix ?= /usr|' Makefile
 	local NUGET=$(usex nuget "true" "false");
 	sed "s/if \[ ! \$TRAVIS \]/if ${NUGET} \&\& \[ ! \$TRAVIS \]/" \
 		-i thirdparty/fetch-thirdparty-deps.sh || die
@@ -63,7 +64,7 @@ src_install()
 {
 	emake $(usex debug "" "DEBUG=false") \
 		datadir="/usr/share/games" \
-		bindir="/usr/games/bin" \
+		bindir="/usr/bin" \
 		libdir="/usr/games/$(get_libdir)/${PN}" \
 		gameinstalldir="/usr/share/games/${PN}" \
 		DESTDIR="${D}" \
