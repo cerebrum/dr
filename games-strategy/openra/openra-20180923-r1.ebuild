@@ -61,16 +61,13 @@ src_compile() {
 
 src_install()
 {
-	emake $(usex debug "" "DEBUG=false") \
-		datadir="/usr/share/games" \
-		bindir="/usr/games/bin" \
-		libdir="/usr/games/$(get_libdir)/${PN}" \
-		gameinstalldir="/usr/share/games/${PN}" \
+	emake VERSION=${MY_PV} $(usex debug "" "DEBUG=false") \
+		prefix="/usr" \
+		libdir="/usr/$(get_libdir)/${PN}" \
+		gameinstalldir="/usr/share/${PN}" \
 		DESTDIR="${D}" \
-		install install-linux-scripts install-man-page
-	emake VERSION=${MY_PV} \
-		datadir="/usr/share" \
-		DESTDIR="${D}" install-linux-mime install-linux-icons
+		install install-linux-scripts install-man-page \
+		install-linux-icons install-linux-mime
 
 	# desktop entries
 	make_desktop_entry "${PN}-cnc" "OpenRA ver. ${MY_PV}" "${PN}-cnc" \
