@@ -13,8 +13,6 @@
 	<use>
 		<flag name='debug'>Compile and run with full debugging information</flag>
 		<flag name='doc'>Generate additional documentation</flag>
-		<flag name='nuget'>Use NuGet utility to fetch thirdparty dependencies
-			instead of regular cURL utility</flag>
 		<flag name='xdg'>xdg-utils are used to open web pages</flag>
 		<flag name='zenity'>zenity is used to display crash dialogs</flag>
 	</use>

@@ -14,7 +14,7 @@ SRC_URI="https://github.com/OpenRA/OpenRA/archive/${MY_PV}.tar.gz -> ${P}.tar.gz
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+debug doc -nuget +xdg +zenity"
+IUSE="+debug doc +xdg +zenity"
 RESTRICT="mirror"
 
 RDEPEND="dev-dotnet/libgdiplus
@@ -28,7 +28,6 @@ RDEPEND="dev-dotnet/libgdiplus
 	xdg? ( x11-misc/xdg-utils )
 	zenity? ( gnome-extra/zenity )"
 DEPEND="${RDEPEND}
-	nuget? ( dev-dotnet/nuget )
 	doc? ( || ( app-text/discount
 		app-text/peg-markdown
 		dev-python/markdown
@@ -47,9 +46,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	local NUGET=$(usex nuget "true" "false");
-	sed "s/if \[ ! \$TRAVIS \]/if ${NUGET} \&\& \[ ! \$TRAVIS \]/" \
-		-i thirdparty/fetch-thirdparty-deps.sh || die
 	emake cli-dependencies
 	eapply_user
 }
