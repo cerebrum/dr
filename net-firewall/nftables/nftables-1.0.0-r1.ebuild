@@ -79,13 +79,6 @@ pkg_setup() {
 
 src_prepare() {
 	default
-
-	# fix installation path for doc stuff
-	sed '/^pkgsysconfdir/s@${sysconfdir}.*$@${docdir}/skels@' \
-		-i files/nftables/Makefile.am || die
-	sed '/^pkgsysconfdir/s@${sysconfdir}.*$@${docdir}/skels/osf@' \
-		-i files/osf/Makefile.am || die
-
 	eautoreconf
 }
 
